@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken');
 // 사용자 인증 미들웨어 임포트
 const authMiddleware = require('../middlewares/auth-middleware');
 
-
 // 회원가입
 router.post('/signup', async (req, res) => {
   try {
@@ -82,26 +81,25 @@ router.post('/login', async (req, res) => {
   }
 });
 
-
 // GET - 회원 정보 조회
 // - nickname, phoneNumber, address, point 조회하기
-router.get('/', authMiddleware,async (req, res) => {
+router.get('/', authMiddleware, async (req, res) => {
   const { userId } = res.locals.user;
 
   try {
-    const userInfo = await User.findByPk(userId,
-        { attributes: ['nickname', 'phoneNumber', 'address', 'point'] }
-        // { attributes: {['nickname, phoneNumber, address, point']} }
+    const userInfo = await User.findByPk(
+      userId,
+      { attributes: ['nickname', 'phoneNumber', 'address', 'point'] }
+      // { attributes: {['nickname, phoneNumber, address, point']} }
     );
     return res.status(200).json({ data: userInfo });
   } catch (error) {
     console.log(error.message);
     return res.status(400).json({
-      errorMessage: "회원 정보 조회에 실패하였습니다."
-    })
+      errorMessage: '회원 정보 조회에 실패하였습니다.',
+    });
   }
-})
-
+});
 
 // PUT - 회원 정보 수정
 // 요청 예시: { “phoneNumber”: “010999977777”, ”address”: “바뀐 집 주소” }
@@ -112,9 +110,9 @@ router.put('/', authMiddleware, async (req, res) => {
 
   if (!phoneNumber || !address) {
     return res.status(412).json({
-      errorMessage: "데이터 형식이 올바르지 않습니다."
+      errorMessage: '데이터 형식이 올바르지 않습니다.',
       // errorMessage: "전화번호와 주소 중 한 곳이 비었습니다."
-    })
+    });
   }
   // // 비밀 번호 수정이 가능토록 하려면:
   // // '새 비밀번호'란에 아무것도 없이 수정 요청이 들어온다면 vs 새 비밀번호도 같이 들어온다면
@@ -149,16 +147,15 @@ router.put('/', authMiddleware, async (req, res) => {
     user.address = address;
     await user.save();
     return res.status(200).json({
-      message: "회원 정보 수정이 완료되었습니다."
-    })
+      message: '회원 정보 수정이 완료되었습니다.',
+    });
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
     return res.status(400).json({
-      errorMessage: "회원 정보 수정에 실패하였습니다."
-    })
+      errorMessage: '회원 정보 수정에 실패하였습니다.',
+    });
   }
-})
-
+});
 
 // DELETE - 회원 정보 삭제
 // 응답 예시: { message: “탈퇴가 완료되었습니다.” }
@@ -169,14 +166,14 @@ router.delete('/', authMiddleware, async (req, res) => {
     const user = await User.findByPk(userId);
     const deleted = await user.destroy();
     return res.status(200).json({
-      message: "탈퇴가 완료되었습니다."
-    })
+      message: '탈퇴가 완료되었습니다.',
+    });
   } catch (error) {
     console.log(error.message);
     return res.status(400).json({
-      errorMessage: "예기치 못한 문제로 탈퇴 처리에 실패하였습니다."
-    })
+      errorMessage: '예기치 못한 문제로 탈퇴 처리에 실패하였습니다.',
+    });
   }
-})
+});
 
 module.exports = router;
