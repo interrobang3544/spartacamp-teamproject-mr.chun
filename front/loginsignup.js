@@ -1,9 +1,10 @@
 const container = document.querySelector(".container"),
         pwShowHide = document.querySelectorAll(".showHidePw"),
-        pwFields = document.querySelectorAll(".password");
-        signUp = document.querySelectorAll(".signup-link");
+        pwFields = document.querySelectorAll(".password"),
+        signUp = document.querySelectorAll(".signup-link"),
         login = document.querySelectorAll(".login-link");
 
+//비밀번호 가리기/보이기 + 아이콘 바뀌기
         pwShowHide.forEach(eyeIcon => {
             eyeIcon.addEventListener("click", () => {
 
@@ -25,10 +26,10 @@ const container = document.querySelector(".container"),
             })
         })
 
-        //나타내기
-        signUp.addEventListener("click", () => {
+// // 회원가입, 로그인 폼 나오게 하기
+        $(document).on('click', '#signupform', function(){
             container.classList.add("active");
-        })
-        login.addEventListener("click", () => {
+        });
+        $(document).on('click', '#loginform', function(){
             container.classList.remove("active");
-        })
+        });
