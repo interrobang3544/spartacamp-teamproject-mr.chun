@@ -7,46 +7,46 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       title: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       content: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
       },
       rate: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       serviceId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
-    await queryInterface.addConstraint("Reviews", {
-      fields: ["serviceId"],
-      type: "foreign key",
-      name: "FK_Reviews_Services",
-      references: {
-        table: "Services",
-        field: "serviceId",
+        type: Sequelize.DATE,
       },
-      onDelete: "cascade",
-      onUpdate: "cascade",
+    });
+    await queryInterface.addConstraint('Reviews', {
+      fields: ['serviceId'],
+      type: 'foreign key',
+      name: 'FK_Reviews_Services',
+      references: {
+        table: 'Services',
+        field: 'serviceId',
+      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Reviews');
-  }
+  },
 };

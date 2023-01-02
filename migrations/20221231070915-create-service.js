@@ -7,60 +7,60 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       status: {
         allowNull: false,
         type: Sequelize.STRING,
-        defaultValue: "대기 중"
+        defaultValue: '대기 중',
       },
       image: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       customerRequest: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       customerId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       ownerId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
-    await queryInterface.addConstraint("Services", {
-      fields: ["customerId"],
-      type: "foreign key",
-      name: "FK_Services_Customers",
-      references: {
-        table: "Users",
-        field: "userId",
+        type: Sequelize.DATE,
       },
-      onDelete: "cascade",
-      onUpdate: "cascade",
     });
-    await queryInterface.addConstraint("Services", {
-      fields: ["ownerId"],
-      type: "foreign key",
-      name: "FK_Services_Owners",
+    await queryInterface.addConstraint('Services', {
+      fields: ['customerId'],
+      type: 'foreign key',
+      name: 'FK_Services_Customers',
       references: {
-        table: "Users",
-        field: "userId",
+        table: 'Users',
+        field: 'userId',
       },
-      onDelete: "cascade",
-      onUpdate: "cascade",
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    });
+    await queryInterface.addConstraint('Services', {
+      fields: ['ownerId'],
+      type: 'foreign key',
+      name: 'FK_Services_Owners',
+      references: {
+        table: 'Users',
+        field: 'userId',
+      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Services');
-  }
+  },
 };
