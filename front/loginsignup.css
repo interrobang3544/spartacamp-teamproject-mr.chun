@@ -59,7 +59,7 @@ body{
 }
 
 .container.active .forms{
-    height: 600px;
+    height: 800px;
 }
 .container .form .title{
     position: relative;
@@ -155,7 +155,7 @@ body{
 }
 
 .form .button{
-    margin-top: 35px;
+    margin-top: 5px;
 }
 
 .form .button input{
@@ -175,6 +175,48 @@ body{
 }
 
 .form .login-signup{
-    margin-top: 30px;
+    margin-top: 20px;
     text-align: center;
+}
+
+
+/* 사장/고객 선택 버튼 */
+.hero{
+    padding-top: 20px;
+}
+#selectField{
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
+    background:rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 14px;
+}
+#list{
+    width: 100%;
+    background:rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 14px;
+}
+.options{
+    width: 100%;
+    padding: 5px;
+    list-style: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.options:hover{
+    background: rgba(255,255,255,0.7);
+}
+.hide{
+    visibility: hidden;
+}
+.rotate{
+    transform: rotate(180deg);
 }
