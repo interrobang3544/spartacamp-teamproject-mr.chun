@@ -12,7 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <!-- icon -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     
@@ -23,11 +22,11 @@
 
                 <form action="#">
                     <div class="input-field">
-                        <input type="text" placeholder="이메일을 입력하세요" required>
-                        <i class="uil uil-envelope icon"></i>
+                        <input id="loginNickname" type="text" placeholder="아이디를 입력하세요" required>
+                        <i class="uil uil-user"></i>
                     </div>
                     <div class="input-field">
-                        <input type="password" class="password" placeholder="비밀번호를 입력하세요" required>
+                        <input id="loginPassword" type="password" class="password" placeholder="비밀번호를 입력하세요" required>
                         <i class="uil uil-lock-alt icon"></i>
                         <i class="uil uil-eye-slash showHidePw"></i>
                     </div>
@@ -42,7 +41,7 @@
                     </div>
 
                     <div class="input-field button">
-                        <input type="button" value="로그인">
+                        <input type="button" onclick="sign_in()" value="로그인">
                     </div>
                 </form>
 
@@ -59,21 +58,25 @@
 
                 <form action="#">
                     <div class="input-field">
-                        <input type="text" placeholder="이름을 입력하세요" required>
+                        <input id="inputNickname" type="text" placeholder="아이디를 입력하세요" required>
                         <i class="uil uil-user"></i>
                     </div>
                     <div class="input-field">
-                        <input type="text" placeholder="이메일을 입력하세요" required>
-                        <i class="uil uil-envelope icon"></i>
-                    </div>
-                    <div class="input-field">
-                        <input type="password" class="password" placeholder="비밀번호를 입력하세요" required>
+                        <input id="inputPassword" type="password" class="password" placeholder="비밀번호를 입력하세요" required>
                         <i class="uil uil-lock-alt icon"></i>
                     </div>
                     <div class="input-field">
-                        <input type="password" class="password" placeholder="비밀번호를 확인하세요" required>
+                        <input id="inputConfirm" type="password" class="password" placeholder="비밀번호를 확인하세요" required>
                         <i class="uil uil-lock-alt icon"></i>
                         <i class="uil uil-eye-slash showHidePw"></i>
+                    </div>
+                    <div class="input-field">
+                        <input id="inputPhoneNumber" type="text" placeholder="전화번호를 입력하세요" required>
+                        <i class="uil uil-phone icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input id="inputAddress" type="text" placeholder="주소를 입력하세요" required>
+                        <i class="uil uil-home icon"></i>
                     </div>
 
                     <div class="checkbox-text">
@@ -86,7 +89,7 @@
                     </div>
 
                     <div class="input-field button">
-                        <input type="button" value="회원가입">
+                        <input type="button" onclick='sign_up()' value="회원가입">
                     </div>
                 </form>
 
@@ -99,7 +102,8 @@
         </div>
     </div>
 
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./loginsignup.js" type="text/javascript"></script>
 </body>
-<script src="./loginsignup.js" type="text/javascript"></script>
 </html>

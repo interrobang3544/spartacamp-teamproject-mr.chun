@@ -1,35 +1,73 @@
-const container = document.querySelector(".container"),
-        pwShowHide = document.querySelectorAll(".showHidePw"),
-        pwFields = document.querySelectorAll(".password"),
-        signUp = document.querySelectorAll(".signup-link"),
-        login = document.querySelectorAll(".login-link");
+const container = document.querySelector('.container'),
+  pwShowHide = document.querySelectorAll('.showHidePw'),
+  pwFields = document.querySelectorAll('.password'),
+  signUp = document.querySelectorAll('.signup-link'),
+  login = document.querySelectorAll('.login-link');
 
 //비밀번호 가리기/보이기 + 아이콘 바뀌기
-        pwShowHide.forEach(eyeIcon => {
-            eyeIcon.addEventListener("click", () => {
+pwShowHide.forEach((eyeIcon) => {
+  eyeIcon.addEventListener('click', () => {
+    pwFields.forEach((pwField) => {
+      if (pwField.type === 'password') {
+        pwField.type = 'text';
 
-                pwFields.forEach(pwField => {
-                    if(pwField.type ==="password") {
-                        pwField.type = "text";
-
-                        pwShowHide.forEach(icon => {
-                            icon.classList.replace("uil-eye-slash", "uil-eye");
-                        })
-                    }else{
-                        pwField.type = "password";
-
-                        pwShowHide.forEach(icon => {
-                            icon.classList.replace("uil-eye", "uil-eye-slash");
-                        })
-                    }
-                })
-            })
-        })
-
-// // 회원가입, 로그인 폼 나오게 하기
-        $(document).on('click', '#signupform', function(){
-            container.classList.add("active");
+        pwShowHide.forEach((icon) => {
+          icon.classList.replace('uil-eye-slash', 'uil-eye');
         });
-        $(document).on('click', '#loginform', function(){
-            container.classList.remove("active");
+      } else {
+        pwField.type = 'password';
+
+        pwShowHide.forEach((icon) => {
+          icon.classList.replace('uil-eye', 'uil-eye-slash');
         });
+      }
+    });
+  });
+});
+
+// 회원가입, 로그인 폼 나오게 하기
+$(document).on('click', '#signupform', function () {
+  container.classList.add('active');
+});
+$(document).on('click', '#loginform', function () {
+  container.classList.remove('active');
+});
+
+// 회원가입
+function sign_up() {
+  const nickname = document.getElementById('inputNickname').value;
+  const password = document.getElementById('inputPassword').value;
+  const confirm = document.getElementById('inputConfirm').value;
+  const phoneNumber = document.getElementById('inputPhoneNumber').value;
+  const address = document.getElementById('inputAddress').value;
+
+  axios
+    .post('api/users/signup', {
+      nickname: nickname,
+      password: password,
+      confirm: confirm,
+      phoneNumber: phoneNumber,
+      address: address,
+      userType: 0,
+    })
+    .then((response) => {
+      console.log(response);
+      window.location.replace('/');
+    });
+}
+
+// 로그인
+function sign_in() {
+  let nickname = document.getElementById('loginNickname').value;
+  let password = document.getElementById('loginPassword').value;
+  axios
+    .post('api/users/login', {
+      nickname: nickname,
+      password: password,
+    })
+    .then((response) => {
+      console.log(response);
+      localStorage.setItem('token', response.data.token);
+      window.location.replace('/');
+    });
+}
