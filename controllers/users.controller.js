@@ -9,9 +9,8 @@ class UsersController {
       const { nickname, password, confirm, phoneNumber, address, userType } =
         req.body;
       const existsUsers = await this.userService.findUserByNickname(nickname);
-      console.log(req.body, existsUsers)
       const nicknameCheck = /^[A-Za-z0-9]{3,}$/;
-      const phoneNumberCheck = /^[0-9]{11,12}$/;
+      const phoneNumberCheck = /^[0-9]{11,11}$/;
 
       if (nickname.length == 0) {
         res.status(412).send({
@@ -24,7 +23,7 @@ class UsersController {
             '닉네임의 형식이 일치하지 않습니다. (영문자와 숫자만 조합가능)',
         });
         return;
-      } else if (existsUsers.length) {
+      } else if (existsUsers.nickname) {
         res.status(412).send({
           errorMessage: '중복된 닉네임입니다.',
         });
@@ -90,7 +89,7 @@ class UsersController {
       );
 
       if (userType === 0) {
-        point = 1000000;
+        let point = 1000000;
         await this.userService.updateUserPointByNickname(point, nickname);
       }
 
@@ -108,21 +107,18 @@ class UsersController {
   login = async (req, res, next) => {
     try {
       const { nickname, password } = req.body;
-      
-      console.log("con", user)
+      const user = await this.userService.findUserByNickname(nickname);
       if (!nickname) {
         res.status(412).send({
           errorMessage: '닉네임을 입력해주세요.',
         });
         return;
       } 
-      
-      try {
-        await this.userService.findUserByNickname(nickname);
-      } catch(err) {
+      if (!user.nickname) {
         res.status(412).send({
           errorMessage: '존재하지 않는 닉네임 입니다.',
         });
+        return;
       }
 
       if (!password) {

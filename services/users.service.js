@@ -5,8 +5,6 @@ class UserService {
 
   findUserByNickname = async (nickname) => {
     const findUser = await this.userRepository.findUserByNickname(nickname);
-    if (!findUser) throw new Error("Post doesn't exist");
-
     return {
       userId: findUser.userId,
       nickname: findUser.nickname,
@@ -31,8 +29,8 @@ class UserService {
 
     return {
       nickname: createUserData.nickname,
-      password: createUserData.title,
-      phoneNumber: createUserData.content,
+      password: createUserData.password,
+      phoneNumber: createUserData.phoneNumber,
       address: createUserData.address,
       userType: createUserData.userType,
     };
