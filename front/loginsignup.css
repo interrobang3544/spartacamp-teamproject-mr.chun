@@ -1,15 +1,6 @@
 /* ===== Google Font Import - Poformsins ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-@font-face {
-    font-family: 'Apple SD Gothic Neo';
-    font-style: bold;
-    font-weight: 600;
-    src: url('/fonts/Apple/AppleSDGothicNeoB.woff2') format('font-woff2'),
-        url('/fonts/Apple/AppleSDGothicNeoB.woff') format('woff'),
-        url('/fonts/Apple/AppleSDGothicNeoB.otf') format('truetype');
-}
-
 *{
     margin: 0;
     padding: 0;
