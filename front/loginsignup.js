@@ -77,7 +77,7 @@ function sign_up() {
     })
     .then((response) => {
       console.log(response);
-      window.location.replace('/');
+      window.location.replace('/loginsignup.html');
     });
 }
 
