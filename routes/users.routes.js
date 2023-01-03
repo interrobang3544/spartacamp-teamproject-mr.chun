@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 // 사용자 인증 미들웨어 임포트
 const authMiddleware = require('../middlewares/auth-middleware');
 
+
 // 회원가입
 router.post('/signup', async (req, res) => {
   try {

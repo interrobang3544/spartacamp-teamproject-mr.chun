@@ -4,6 +4,7 @@ const port = 8080;
 
 const router = require('./routes');
 
+app.use(express.static("front"))
 app.use(express.json());
 app.use('/api', router);
 
