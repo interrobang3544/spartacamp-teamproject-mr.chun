@@ -9,6 +9,7 @@ class UsersController {
       const { nickname, password, confirm, phoneNumber, address, userType } =
         req.body;
       const existsUsers = await this.userService.findUserByNickname(nickname);
+      console.log(req.body, existsUsers)
       const nicknameCheck = /^[A-Za-z0-9]{3,}$/;
       const phoneNumberCheck = /^[0-9]{11,12}$/;
 
@@ -107,17 +108,21 @@ class UsersController {
   login = async (req, res, next) => {
     try {
       const { nickname, password } = req.body;
-      const user = await this.userService.findUserByNickname(nickname);
+      
+      console.log("con", user)
       if (!nickname) {
         res.status(412).send({
           errorMessage: '닉네임을 입력해주세요.',
         });
         return;
-      } else if (!user) {
+      } 
+      
+      try {
+        await this.userService.findUserByNickname(nickname);
+      } catch(err) {
         res.status(412).send({
           errorMessage: '존재하지 않는 닉네임 입니다.',
         });
-        return;
       }
 
       if (!password) {

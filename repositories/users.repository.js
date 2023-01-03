@@ -2,7 +2,7 @@ const { User } = require('../models');
 
 class UserRepository {
   findUserByNickname = async (nickname) => {
-    const user = await User.findOne({ where: nickname });
+    const user = await User.findOne({ where: { nickname } });
 
     return user;
   };

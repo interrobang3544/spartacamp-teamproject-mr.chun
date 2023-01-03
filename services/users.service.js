@@ -5,12 +5,13 @@ class UserService {
 
   findUserByNickname = async (nickname) => {
     const findUser = await this.userRepository.findUserByNickname(nickname);
+    if (!findUser) throw new Error("Post doesn't exist");
 
     return {
       userId: findUser.userId,
       nickname: findUser.nickname,
-      password: findUser.title,
-      phoneNumber: findUser.content,
+      password: findUser.password,
+      phoneNumber: findUser.phoneNumber,
       address: findUser.address,
       userType: findUser.userType,
       point: findUser.point,
@@ -33,20 +34,25 @@ class UserService {
       password: createUserData.title,
       phoneNumber: createUserData.content,
       address: createUserData.address,
-      userType: createUserData.userType
+      userType: createUserData.userType,
     };
   };
 
   updateUserPointByNickname = async (point, nickname) => {
     await this.userRepository.updateUserPointByNickname(point, nickname);
 
-    const updateUserPoint = await this.userRepository.findUserByNickname(
-      nickname
-    );
+    const updateUser = await this.userRepository.findUserByNickname(nickname);
 
     return {
-      point: updateUserPoint.point,
-      nickname: updateUserPoint.nickname,
+      userId: updateUser.userId,
+      nickname: updateUser.nickname,
+      password: updateUser.password,
+      phoneNumber: updateUser.phoneNumber,
+      address: updateUser.address,
+      userType: updateUser.userType,
+      point: updateUser.point,
+      createdAt: updateUser.createdAt,
+      updatedAt: updateUser.updatedAt,
     };
   };
 }
