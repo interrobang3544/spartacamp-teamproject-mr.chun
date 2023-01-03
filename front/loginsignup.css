@@ -1,6 +1,15 @@
 /* ===== Google Font Import - Poformsins ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+@font-face {
+    font-family: 'Apple SD Gothic Neo';
+    font-style: bold;
+    font-weight: 600;
+    src: url('/fonts/Apple/AppleSDGothicNeoB.woff2') format('font-woff2'),
+        url('/fonts/Apple/AppleSDGothicNeoB.woff') format('woff'),
+        url('/fonts/Apple/AppleSDGothicNeoB.otf') format('truetype');
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -13,12 +22,12 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #4070f4;
+    background-color: #4070f4 !important;
 }
 
 .container{
     position: relative;
-    max-width: 430px;
+    max-width: 430px !important; 
     width: 100%;
     background: #fff;
     border-radius: 10px;
@@ -59,7 +68,7 @@ body{
 }
 
 .container.active .forms{
-    height: 800px;
+    height: 700px;
 }
 .container .form .title{
     position: relative;
@@ -82,7 +91,7 @@ body{
     position: relative;
     height: 50px;
     width: 100%;
-    margin-top: 30px;
+    margin: 15px 0;
 }
 
 .input-field input{
@@ -174,6 +183,10 @@ body{
     background-color: #265df2;
 }
 
+#signup-btn {
+    margin-top: 30px;
+}
+
 .form .login-signup{
     margin-top: 20px;
     text-align: center;
@@ -182,7 +195,7 @@ body{
 
 /* 사장/고객 선택 버튼 */
 .hero{
-    padding-top: 20px;
+    margin-top: 30px;
 }
 #selectField{
     width: 100%;
@@ -197,12 +210,21 @@ body{
     cursor: pointer;
     font-size: 14px;
 }
+#selectText{
+    margin-bottom: 0;
+}
 #list{
-    width: 100%;
-    background:rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 1;
+    width: 346px;
+    background:#e5e5e5;
     border-radius: 6px;
     overflow: hidden;
     font-size: 14px;
+    padding-left: 0;
+}
+#list > li > p {
+    margin-bottom: 0;
 }
 .options{
     width: 100%;
