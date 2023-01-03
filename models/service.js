@@ -9,8 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Service.belongsTo(models.User, { foreignKey: 'customerId', as: 'customer' });
-      models.Service.belongsTo(models.User, { foreignKey: 'ownerId', as: 'owner' });
+      models.Service.belongsTo(models.User, {
+        foreignKey: 'customerId',
+        as: 'customer',
+      });
+      models.Service.belongsTo(models.User, {
+        foreignKey: 'ownerId',
+        as: 'owner',
+      });
       models.Service.hasMany(models.Review, { foreignKey: 'serviceId' });
     }
   }

@@ -2,14 +2,14 @@ const express = require('express');
 const router = express.Router();
 const { Service, User } = require('../models');
 const authMiddleware = require('../middlewares/auth-middleware');
-const { Op } = require('sequelize')
+const { Op } = require('sequelize');
 
 // POST - 서비스 신청
 // - 요청 예시: { “nickname”: “빨래_싫어”,
-    // “phoneNumber”: “01012345678”,
-    // “address”: “__시 __구 __…”,
-    // “image”: “../statics/images/img1.jpg”,
-    // “customerRequest”: “” }
+// “phoneNumber”: “01012345678”,
+// “address”: “__시 __구 __…”,
+// “image”: “../statics/images/img1.jpg”,
+// “customerRequest”: “” }
 // - 응답 예시: { message: “세탁 서비스 신청이 등록되었습니다.” }
 // => 닉네임, 전화번호, 주소가 자동으로 채워져있게 하고, 만약 수정했을 시...ㅠㅠ
 router.post('/', authMiddleware, async (req, res) => {
@@ -34,16 +34,16 @@ router.post('/', authMiddleware, async (req, res) => {
 // GET - 서비스 조회
 // 사장님 마이페이지에서 현재 진행중인 세탁 서비스 조회
 // - 응답 예시: "data":
-    // { "serviceId": 1,
-    // “customerNickname”: “빨래 싫어”,
-    // ”image”: “”,
-    // ”customerRequest”: “꼼꼼히 부탁드립니다”,
-    // ”customerAddress”: “제주도 서귀포시”,
-    // ”customerPhoneNumber”: “01012345678”,
-    // "ownerNickname": ”Owner1”,
-    // “status”: “수거 중”,
-    // "createdAt": "2022-07-25T07:45:56.000Z",
-    // "updatedAt": "2022-07-25T07:45:56.000Z"}
+// { "serviceId": 1,
+// “customerNickname”: “빨래 싫어”,
+// ”image”: “”,
+// ”customerRequest”: “꼼꼼히 부탁드립니다”,
+// ”customerAddress”: “제주도 서귀포시”,
+// ”customerPhoneNumber”: “01012345678”,
+// "ownerNickname": ”Owner1”,
+// “status”: “수거 중”,
+// "createdAt": "2022-07-25T07:45:56.000Z",
+// "updatedAt": "2022-07-25T07:45:56.000Z"}
 router.get('/:serviceId', authMiddleware, async (req, res) => {
   const { serviceId } = req.params;
   const user = res.locals.user;
@@ -79,21 +79,26 @@ router.get('/:serviceId', authMiddleware, async (req, res) => {
       //   // attributes: [] // ['nickname', 'customerNickname']],
       // }],
       where: { serviceId },
-      attributes: ['serviceId',
-        'image', 'customerRequest',
-        'status', 'createdAt', 'updatedAt']
-    })
+      attributes: [
+        'serviceId',
+        'image',
+        'customerRequest',
+        'status',
+        'createdAt',
+        'updatedAt',
+      ],
+    });
     const data = {
-      'serviceId': serviceDetail.serviceId,
-      'customerNickname': serviceDetail.customer.nickname,
-      'image': serviceDetail.image,
-      'customerRequest': serviceDetail.customerRequest,
-      'customerAddress': serviceDetail.customer.address,
-      'customerPhoneNumber': serviceDetail.customer.phoneNumber,
-      'status': serviceDetail.status,
-      'createdAt': serviceDetail.createdAt,
-      'updatedAt': serviceDetail.updatedAt
-    }
+      serviceId: serviceDetail.serviceId,
+      customerNickname: serviceDetail.customer.nickname,
+      image: serviceDetail.image,
+      customerRequest: serviceDetail.customerRequest,
+      customerAddress: serviceDetail.customer.address,
+      customerPhoneNumber: serviceDetail.customer.phoneNumber,
+      status: serviceDetail.status,
+      createdAt: serviceDetail.createdAt,
+      updatedAt: serviceDetail.updatedAt,
+    };
     if (serviceDetail.owner) {
       data.ownerNickname = serviceDetail.owner.nickname;
     } else {
@@ -101,13 +106,13 @@ router.get('/:serviceId', authMiddleware, async (req, res) => {
     }
 
     return res.status(200).json({
-      data
-    })
+      data,
+    });
   } catch (error) {
     console.log(error);
     return res.status(400).json({
-      errorMessage: "서비스 조회에 실패하였습니다."
-    })
+      errorMessage: '서비스 조회에 실패하였습니다.',
+    });
   }
 });
 
@@ -116,7 +121,7 @@ router.get('/:serviceId', authMiddleware, async (req, res) => {
 // - 요청 예시: { “status”: “수거 완료”}
 // - 응답 예시: {” message”: “세탁 상태를 업데이트 하였습니다” }
 router.put('/:serviceId', authMiddleware, async (req, res) => {
-  const { serviceId } = req.params
+  const { serviceId } = req.params;
   const { status } = req.body;
   const { userId } = res.locals.user;
 
@@ -124,8 +129,8 @@ router.put('/:serviceId', authMiddleware, async (req, res) => {
   //
   if (!status) {
     return res.status(412).json({
-      errorMessage: "데이터 형식이 올바르지 않습니다."
-    })
+      errorMessage: '데이터 형식이 올바르지 않습니다.',
+    });
   }
 
   //
@@ -137,19 +142,19 @@ router.put('/:serviceId', authMiddleware, async (req, res) => {
     const alreadyHasOne = await Service.findOne({
       where: {
         ownerId: userId,
-        status: { [Op.ne]: '배송 완료' }
-      }
-    })
+        status: { [Op.ne]: '배송 완료' },
+      },
+    });
     if (alreadyHasOne) {
       return res.status(400).json({
-        errorMessage: "이미 진행중인 세탁 서비스가 있습니다."
-      })
+        errorMessage: '이미 진행중인 세탁 서비스가 있습니다.',
+      });
     }
   } catch (error) {
     console.log(error);
     return res.status(400).json({
-      errorMessage: '입력한 데이터가 올바르지 않습니다.'
-    })
+      errorMessage: '입력한 데이터가 올바르지 않습니다.',
+    });
   }
 
   // 세탁 상태 업데이트하기
@@ -163,23 +168,27 @@ router.put('/:serviceId', authMiddleware, async (req, res) => {
     // 수거 완료 → 배송 중 → 배송 완료 의 순서로 업데이트 하지 않은 경우
     if (service.status === '대기 중' && status !== '수거 중') {
       return res.status(400).json({
-        errorMessage: '세탁 상태는 "수거 중 -> 수거 완료 → 배송 중 → 배송 완료"의 순서로 업데이트 가능합니다'
-      })
+        errorMessage:
+          '세탁 상태는 "수거 중 -> 수거 완료 → 배송 중 → 배송 완료"의 순서로 업데이트 가능합니다',
+      });
     }
     if (service.status === '수거 중' && status !== '수거 완료') {
       return res.status(400).json({
-        errorMessage: '세탁 상태는 "수거 중 -> 수거 완료 → 배송 중 → 배송 완료"의 순서로 업데이트 가능합니다'
-      })
+        errorMessage:
+          '세탁 상태는 "수거 중 -> 수거 완료 → 배송 중 → 배송 완료"의 순서로 업데이트 가능합니다',
+      });
     }
     if (service.status === '수거 완료' && status !== '배송 중') {
       return res.status(400).json({
-        errorMessage: '세탁 상태는 "수거 중 -> 수거 완료 → 배송 중 → 배송 완료"의 순서로 업데이트 가능합니다'
-      })
+        errorMessage:
+          '세탁 상태는 "수거 중 -> 수거 완료 → 배송 중 → 배송 완료"의 순서로 업데이트 가능합니다',
+      });
     }
     if (service.status === '배송 중' && status !== '배송 완료') {
       return res.status(400).json({
-        errorMessage: '세탁 상태는 "수거 중 -> 수거 완료 → 배송 중 → 배송 완료"의 순서로 업데이트 가능합니다'
-      })
+        errorMessage:
+          '세탁 상태는 "수거 중 -> 수거 완료 → 배송 중 → 배송 완료"의 순서로 업데이트 가능합니다',
+      });
     }
 
     // 대기 중 -> 수거 중 으로 바뀐 경우(사장님이 처음으로 맡게 되었을 때):
@@ -193,13 +202,13 @@ router.put('/:serviceId', authMiddleware, async (req, res) => {
     service.status = status;
     await service.save();
     return res.status(200).json({
-      message: "세탁 상태를 업데이트 하였습니다."
-    })
+      message: '세탁 상태를 업데이트 하였습니다.',
+    });
   } catch (error) {
     console.log(error.message);
     return res.status(400).json({
-      errorMessage: "세탁 상태 업데이트에 실패하였습니다."
-    })
+      errorMessage: '세탁 상태 업데이트에 실패하였습니다.',
+    });
   }
 });
 
