@@ -143,6 +143,13 @@ class UsersController {
       return;
     }
   };
+
+  me = async (req, res, next) => {
+    const { user } = res.locals;
+    res.send({
+      user,
+    });
+  };
 }
 
 module.exports = UsersController;

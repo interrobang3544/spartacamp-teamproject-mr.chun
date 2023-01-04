@@ -1,4 +1,4 @@
-===== Google Font Import - Poformsins =====
+/* ===== Google Font Import - Poformsins ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 *{
@@ -62,7 +62,7 @@
 
 .container{
     justify-content: center;
-    max-width: 430px;
+    max-width: 500px !important;
     width: 100%;
     background: rgb(205, 93, 93);
     border-radius: 10px;
@@ -112,6 +112,16 @@
     border-top: 2px solid transparent;
     transition: all 0.2s ease;
 }
+
+.input-field i{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 23px;
+    transition: all 0.2s ease;
+}
+
 .form .text{
     color: #333;
     font-size: 14px;
