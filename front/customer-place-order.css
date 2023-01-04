@@ -1,4 +1,4 @@
-/* ===== Google Font Import - Poformsins ===== */
+===== Google Font Import - Poformsins =====
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 *{
@@ -8,23 +8,67 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-body{
+/* body{
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #ffffff;
+}  */
+
+/* --------  H E A D E R ---- */
+.header nav{
+    padding-top:10px;
+    padding-left: 5px;
+    padding-right: 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
 }
+.nav img{
+    width: 1;
+    height: 1;
+}
+.nav-links{
+    flex: 10;
+    text-align: right;
+    padding-bottom: 26px;
+}
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+}
+.nav-links ul li a{
+    color: #000000;
+    text-decoration: none;
+    font-size: 13px;
+}
+.nav-links ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #4070f4;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+.nav-links ul li:hover::after{
+    width: 100%;
+}
+/* --------  H E A D E R ----  */
 
 .container{
-    position: relative;
+    justify-content: center;
     max-width: 430px;
     width: 100%;
     background: rgb(205, 93, 93);
     border-radius: 10px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    margin: 0 20px;
+    margin: auto;
 }
 
 .container .forms{
@@ -73,18 +117,6 @@ body{
     font-size: 14px;
 }
 
-.form a.text{
-    color: #4070f4;
-    text-decoration: none;
-}
-.form a:hover{
-    text-decoration: underline;
-}
-
-.form .button{
-    margin-top: 5px;
-}
-
 .form .button input{
     border: none;
     color: #fff;
@@ -99,9 +131,4 @@ body{
 
 .button input:hover{
     background-color: #265df2;
-}
-
-.form .login-signup{
-    margin-top: 20px;
-    text-align: center;
 }
