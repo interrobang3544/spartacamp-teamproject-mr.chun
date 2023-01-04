@@ -1,8 +1,10 @@
-const { User } = require('../models');
-
 class UserRepository {
+  constructor(UsersModel) {
+    this.usersModel = UsersModel;
+  }
+
   findUserByNickname = async (nickname) => {
-    const user = await User.findOne({ raw: true, where: { nickname } });
+    const user = await this.usersModel.findOne({ raw: true, where: { nickname } });
     if (user === null) {
       return {};
     }
@@ -10,7 +12,7 @@ class UserRepository {
   };
 
   createUser = async (nickname, password, phoneNumber, address, userType) => {
-    const createUserData = await User.create({
+    const createUserData = await this.usersModel.create({
       nickname,
       password,
       phoneNumber,
@@ -22,11 +24,10 @@ class UserRepository {
   };
 
   updateUserPointByNickname = async (point, nickname) => {
-    const updateUserPoint = await User.update(
+    const updateUserPoint = await this.usersModel.update(
       { point },
       { where: { nickname } }
     );
-    console.log(updateUserPoint);
 
     return updateUserPoint;
   };
