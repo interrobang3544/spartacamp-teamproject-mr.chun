@@ -63,6 +63,14 @@ function sign_up() {
   const confirm = document.getElementById('inputConfirm').value;
   const phoneNumber = document.getElementById('inputPhoneNumber').value;
   const address = document.getElementById('inputAddress').value;
+	const userTypeInput = document.getElementById('selectText').innerText;
+
+	let userType = 2
+	if (userTypeInput === '고객님') {
+		userType = 0
+	} else if (userTypeInput === '사장님') {
+		userType = 1
+	}
 
   axios
     .post('api/users/signup', {
@@ -71,13 +79,17 @@ function sign_up() {
       confirm: confirm,
       phoneNumber: phoneNumber,
       address: address,
-      userType: 0,
+      userType: userType,
     })
     .then((response) => {
       console.log(response);
       window.location.replace('/loginsignup.html');
-    });
+    })
+		.catch(error => {
+			customAlert(error.response.data.errorMessage)
+		});
 }
+
 
 // 로그인
 function sign_in() {
@@ -92,5 +104,17 @@ function sign_in() {
       console.log(response);
       localStorage.setItem('token', response.data.token);
       window.location.replace('/');
-    });
+    })
+		.catch(error => {
+			customAlert(error.response.data.errorMessage)
+		});
+}
+
+const myModal = new bootstrap.Modal('#alertModal', {
+  keyboard: true
+})
+
+function customAlert(text) {
+	document.getElementById('modal-text').innerHTML = text
+	myModal.show()
 }
