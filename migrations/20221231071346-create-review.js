@@ -2,37 +2,28 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
-      userId: {
+    await queryInterface.createTable('Reviews', {
+      reviewId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      nickname: {
+      title: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      password: {
+      content: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
-      phoneNumber: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      address: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      userType: {
+      rate: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      point: {
+      serviceId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,
@@ -43,8 +34,19 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+    await queryInterface.addConstraint('Reviews', {
+      fields: ['serviceId'],
+      type: 'foreign key',
+      name: 'FK_Reviews_Services',
+      references: {
+        table: 'Services',
+        field: 'serviceId',
+      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Reviews');
   },
 };

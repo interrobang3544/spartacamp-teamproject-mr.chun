@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
-
-</head>
-<body>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <section class="header">
-        <nav>
-            <a href="index.html"><img src="images/logo.PNG"></a>
-            <div class="nav-links">
-                <ul>
-                    <li><a href="">홈</a></li>
-                    <li><a href="">로그인</a></li>
-                    <li><a href="">회원가입</a></li>
-                    <li><a href="">마이페이지</a></li>
-                </ul>
-            </div>
-        </nav>
+      <nav>
+        <a href="index.html"><img src="images/logo.PNG" /></a>
+        <div class="nav-links">
+          <ul>
+            <li><a href="">홈</a></li>
+            <li class="login-btn"><a href="loginsignup.html">로그인 / 회원가입</a></li>
+            <li class="logout-btn"><a href="mypage.html">마이페이지</a></li>
+            <li class="logout-btn">
+              <a href="#" onclick="logout()">로그아웃</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
     <div class="text-box">
         <h1>천씨네 세탁 서비스로<br>생활의 여유를 누려보세요.</h1>
@@ -33,5 +37,19 @@
         <img src="images/smell.jpg">
     </div>
     </section>
-</body>
+    <script>
+      if (localStorage.getItem('token')) {
+        document.getElementsByClassName('login-btn')[0].style.display = 'none';
+      } else {
+        document.getElementsByClassName('logout-btn')[0].style.display = 'none';
+        document.getElementsByClassName('logout-btn')[1].style.display = 'none';
+      }
+
+      // 로그아웃
+      function logout() {
+        localStorage.clear();
+        window.location.href = '/';
+      }
+    </script>
+  </body>
 </html>
