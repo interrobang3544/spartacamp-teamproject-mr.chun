@@ -134,6 +134,15 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// 유저 정보 반환 (필요없을까..?)
+router.get("/me", authMiddleware, async (req, res) => {
+  const { user } = res.locals;
+  res.send({
+    user,
+  });
+});
+
+
 // GET - 회원 정보 조회
 // - nickname, phoneNumber, address, point 조회하기
 router.get('/', authMiddleware, async (req, res) => {
