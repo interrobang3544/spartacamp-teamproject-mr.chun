@@ -20,7 +20,8 @@ router.post('/signup', async (req, res) => {
       return;
     } else if (!nicknameCheck.test(nickname)) {
       res.status(412).send({
-        errorMessage: '닉네임의 형식이 일치하지 않습니다. (영문자와 숫자만 조합가능)',
+        errorMessage:
+          '닉네임의 형식이 일치하지 않습니다. (영문자와 숫자만 조합가능)',
       });
       return;
     } else if (existsUsers.length) {
@@ -59,7 +60,8 @@ router.post('/signup', async (req, res) => {
       return;
     } else if (!phoneNumberCheck.test(phoneNumber)) {
       res.status(412).send({
-        errorMessage: '전화번호의 형식이 일치하지 않습니다. ( -없이 11자리만 가능 )',
+        errorMessage:
+          '전화번호의 형식이 일치하지 않습니다. ( -없이 11자리만 가능 )',
       });
       return;
     }
@@ -134,14 +136,13 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// 유저 정보 반환 (필요없을까..?)
-router.get("/me", authMiddleware, async (req, res) => {
+// 유저 정보 반환
+router.get('/me', authMiddleware, async (req, res) => {
   const { user } = res.locals;
   res.send({
     user,
   });
 });
-
 
 // GET - 회원 정보 조회
 // - nickname, phoneNumber, address, point 조회하기
@@ -154,6 +155,7 @@ router.get('/', authMiddleware, async (req, res) => {
       { attributes: ['nickname', 'phoneNumber', 'address', 'point'] }
       // { attributes: {['nickname, phoneNumber, address, point']} }
     );
+    console.log('userInfo: ', userInfo);
     return res.status(200).json({ data: userInfo });
   } catch (error) {
     console.log(error.message);
