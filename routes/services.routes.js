@@ -4,6 +4,13 @@ const { Service, User } = require('../models');
 const authMiddleware = require('../middlewares/auth-middleware');
 const { Op } = require('sequelize');
 
+
+const ServicesController = require('../controllers/services.controller');
+const servicesController = new ServicesController;
+
+router.post('/' ,authMiddleware , servicesController.requsest);
+router.get('/customer' , authMiddleware , servicesController.customerinfo);
+
 // POST - 서비스 신청
 // - 요청 예시: { “nickname”: “빨래_싫어”,
 // “phoneNumber”: “01012345678”,
@@ -12,9 +19,6 @@ const { Op } = require('sequelize');
 // “customerRequest”: “” }
 // - 응답 예시: { message: “세탁 서비스 신청이 등록되었습니다.” }
 // => 닉네임, 전화번호, 주소가 자동으로 채워져있게 하고, 만약 수정했을 시...ㅠㅠ
-// POST - 서비스 신청 
-// 고객 서비스 신청
-//
 router.post('/', authMiddleware , async(req , res) => {
 const {userId} = res.locals.user;
 try { 
@@ -39,10 +43,9 @@ try {
 //
 router.get('/customer', authMiddleware, async (req, res) => {
   const {userId} = res.locals.user
-  // const {customerId} = req.params 
   try{
     const service = await Service.findAll({
-      where: {customerId:userId} , order:[['serviceId','DESC']]
+      where: {customerId:userId} , order:[['serviceId','DESC']] // 내림
     });
     res.status(200).json({
       data : service
