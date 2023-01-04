@@ -25,7 +25,6 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       ownerId: {
-        allowNull: false,
         type: Sequelize.INTEGER,
       },
       createdAt: {

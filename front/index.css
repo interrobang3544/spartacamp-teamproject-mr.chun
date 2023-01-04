@@ -6,10 +6,11 @@
 .header{
     min-height: 100vh;
     width: 100%;
-    background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url(images/linen.jpg);
+    /* background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url(images/linen.jpg); */
     background-position: center;
     background-size: cover;
     position: relative;
+    background-color:#fff;
 }
 .header nav{
     padding-top:10px;
@@ -36,7 +37,7 @@
     position: relative;
 }
 .nav-links ul li a{
-    color: #fff;
+    color: #000000;
     text-decoration: none;
     font-size: 13px;
 }
@@ -44,7 +45,7 @@
     content: '';
     width: 0%;
     height: 2px;
-    background: #f44336;
+    background: #4070f4;
     display: block;
     margin: auto;
     transition: 0.5s;
@@ -54,10 +55,25 @@
 }
 .text-box{
     width: 90%;
-    color: #fff;
+    color: rgb(0, 0, 0);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    text-align: center;
+    text-align: left;
+    padding-left: 100px;
+}
+.text-box h1{
+    font-size: 50px;
+}
+.text-box p{
+    padding-top: 10px;
+    font-weight: lighter;
+}
+.homeimage img{
+    padding-top: 100px;
+    padding-right: 120px;
+    float: right;
+    height: 560px;
+    width: 800px;
 }
