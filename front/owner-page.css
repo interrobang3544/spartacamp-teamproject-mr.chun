@@ -7,63 +7,6 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-.header {
-    min-height: 100vh;
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-    background-color: #fff;
-}
-
-.header nav {
-    padding-top: 10px;
-    padding-left: 5px;
-    padding-right: 2%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-
-.nav img {
-    width: 1;
-    height: 1;
-}
-
-.nav-links {
-    flex: 10;
-    text-align: right;
-    padding-bottom: 26px;
-}
-
-.nav-links ul li {
-    list-style: none;
-    display: inline-block;
-    padding: 8px 12px;
-    position: relative;
-}
-
-.nav-links ul li a {
-    color: #000000;
-    text-decoration: none;
-    font-size: 13px;
-}
-
-.nav-links ul li::after {
-    content: '';
-    width: 0%;
-    height: 2px;
-    background: #4070f4;
-    display: block;
-    margin: auto;
-    transition: 0.5s;
-}
-
-.nav-links ul li:hover::after {
-    width: 100%;
-}
-
 body {
     display: flex;
     align-items: center;
@@ -74,10 +17,13 @@ body {
 
 .container {
     width: 330px;
-    background: rgb(37, 99, 110);
+    background: #ffffff;
     text-align: center;
     border-radius: 5px;
     padding: 50px 35px 10px 35px;
+    margin: 0 auto;
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
+
 }
 
 .container header {
@@ -218,4 +164,13 @@ form .page .field button:hover {
 .progress-bar .step:last-child .bullet:before,
 .progress-bar .step:last-child .bullet:after {
     display: none;
+}
+
+#jongki{
+    padding-bottom: 50px;
+    font-size: 14px;
+    position: absolute;
+    top: 316px;
+    color:#4c73e0;
+    text-align: center;
 }
