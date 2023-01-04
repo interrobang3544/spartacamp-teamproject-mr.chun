@@ -12,26 +12,6 @@ const { Op } = require('sequelize');
 // “customerRequest”: “” }
 // - 응답 예시: { message: “세탁 서비스 신청이 등록되었습니다.” }
 // => 닉네임, 전화번호, 주소가 자동으로 채워져있게 하고, 만약 수정했을 시...ㅠㅠ
-router.post('/', authMiddleware, async (req, res) => {
-  const { userId } = res.locals.user;
-  try {
-    const { image, customerRequest } = req.body;
-    const request = await Service.create({
-      image, customerRequest,
-      customerId: userId })
-    return res.status(200).json({
-      message: '세탁 서비스 신청이 등록되었습니다.'
-    })
-  } catch (error) {
-    console.log(error.message);
-    return res.status(400).json({
-      errorMessage: '데이터 형식이 올바르지 않습니다.'
-    })
-  }
-})
-
-
-
 // POST - 서비스 신청 
 // 고객 서비스 신청
 //
@@ -62,7 +42,7 @@ router.get('/customer', authMiddleware, async (req, res) => {
   // const {customerId} = req.params 
   try{
     const service = await Service.findAll({
-      where: {customerId:userId} 
+      where: {customerId:userId} , order:[['serviceId','DESC']]
     });
     res.status(200).json({
       data : service
