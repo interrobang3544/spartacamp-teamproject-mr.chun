@@ -99,13 +99,15 @@ form .page .field button:hover{
 .container .progress-bar .step p{
   font-weight: 500;
   font-size: 14px;
+ /* 상태 글씨 색깔 여기서 바꾸시면 됩니다! */
   color: #000;
   margin-bottom: 8px;
 }
 .progress-bar .step .bullet{
   height: 25px;
   width: 25px;
-  border: 2px solid #000;
+/* 상태 동그라미 색깔 여기서 바꾸시면 됩니다! */
+  border: 2px solid rgba(0, 0, 0, 0.945);
   display: inline-block;
   border-radius: 50%;
   position: relative;
@@ -114,12 +116,10 @@ form .page .field button:hover{
   font-size: 17px;
   line-height: 25px;
 }
-.progress-bar .step .bullet.active{
-  border-color: #d43f8d;
-  background: #d43f8d;
-}
 .progress-bar .step .bullet span{
   position: absolute;
+  /* 상태 숫자 색깔 여기서 바꾸시면 됩니다! */
+  color:#000000;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -134,7 +134,7 @@ form .page .field button:hover{
   right: -40px;
   height: 3px;
   width: 38px;
-  background: #262626;
+  background: #252525;
 }
 .progress-bar .step:last-child .bullet:before,
 .progress-bar .step:last-child .bullet:after{
