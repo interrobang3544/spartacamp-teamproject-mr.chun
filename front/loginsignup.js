@@ -82,8 +82,9 @@ function sign_up() {
       userType: userType,
     })
     .then((response) => {
-      console.log(response);
-      window.location.replace('/loginsignup.html');
+      customAlert('회원가입을 축하드립니다!', function () {
+        window.location.replace('/loginsignup.html');
+      });
     })
     .catch((error) => {
       customAlert(error.response.data.errorMessage);
@@ -100,7 +101,6 @@ function sign_in() {
       password: password,
     })
     .then((response) => {
-      console.log(response);
       localStorage.setItem('token', response.data.token);
       window.location.replace('/');
     })
@@ -109,11 +109,12 @@ function sign_in() {
     });
 }
 
-const myModal = new bootstrap.Modal('#alertModal', {
-  keyboard: true,
-});
-
-function customAlert(text) {
+// 모달창
+const myModal = new bootstrap.Modal('#alertModal');
+function customAlert(text, confirmCallback) {
   document.getElementById('modal-text').innerHTML = text;
   myModal.show();
+  if (confirmCallback) {
+    $('#alertModal .btn-confirm').click(confirmCallback);
+  }
 }

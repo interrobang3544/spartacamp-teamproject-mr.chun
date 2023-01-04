@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <!-- css link -->
+    <link rel="stylesheet" href="customer-place-order.css">
+</head>
+
+<body>
+    <section class="header">
+        <nav>
+            <a href="index.html"><img src="images/logo.PNG" /></a>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="">홈</a></li>
+                    <li class="login-btn"><a href="loginsignup.html">로그인 / 회원가입</a></li>
+                    <li class="logout-btn"><a href="mypage.html">마이페이지</a></li>
+                    <li class="logout-btn">
+                        <a href="#" onclick="logout()">로그아웃</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="forms">
+                <div class="form signup">
+                    <span class="title">빨래 신청하기</span>
+    
+                    <form action="#">
+                        <div class="input-field">
+                            <input type="text" placeholder="닉네임을 입력하세요" required>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" placeholder="전화번호를 입력하세요" required>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" placeholder="주소를 입력하세요" required>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" placeholder="상세주소를 입력하세요" required>
+                        </div>
+                        <div class="input-field">
+                            <input type="text" placeholder="요청사항을 입력하세요" required>
+                        </div>
+    
+                        <div class="input-field button">
+                            <input type="button" value="신청하기">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</body>
+
+</html>
