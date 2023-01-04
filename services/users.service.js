@@ -53,6 +53,44 @@ class UserService {
       updatedAt: updateUser.updatedAt,
     };
   };
+
+  findUserByPk = async (userId) => {
+    const user = await this.userRepository.findUserByPk(userId);
+    return {
+      nickname: user.nickname,
+      phoneNumber: user.phoneNumber,
+      address: user.address,
+      point: user.point,
+    };
+  };
+
+  updateUserInfoByPk = async (userId, phoneNumber, address) => {
+    const updatedUserData = await this.userRepository.updateUserInfoByPk(
+      userId,
+      phoneNumber,
+      address
+    );
+    return {
+      nickname: updatedUserData.nickname,
+      phoneNumber: updatedUserData.phoneNumber,
+      address: updatedUserData.address,
+      point: updatedUserData.point,
+      createdAt: updatedUserData.createdAt,
+      updatedAt: updatedUserData.updatedAt,
+    };
+  };
+
+  deleteUserByPk = async (userId) => {
+    const deletedUserData = await this.userRepository.deleteUserByPk(userId);
+    return {
+      nickname: deletedUserData.nickname,
+      phoneNumber: deletedUserData.phoneNumber,
+      address: deletedUserData.address,
+      point: deletedUserData.point,
+      createdAt: deletedUserData.createdAt,
+      updatedAt: deletedUserData.updatedAt,
+    };
+  };
 }
 
 module.exports = UserService;

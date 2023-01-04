@@ -30,6 +30,28 @@ class UserRepository {
 
     return updateUserPoint;
   };
+
+  findUserByPk = async (userId) => {
+    const user = await User.findByPk(userId);
+    return user;
+  };
+
+  updateUserInfoByPk = async (userId, phoneNumber, address) => {
+    const updatedUserData = await User.update(
+      { phoneNumber, address },
+      { where: { userId } }
+      // { where: { userId, password } }
+    );
+    return updatedUserData;
+  };
+
+  deleteUserByPk = async (userId) => {
+    const deletedUserData = await User.destroy({
+      where: { userId },
+      // where: { userId, password }
+    });
+    return deletedUserData;
+  };
 }
 
 module.exports = UserRepository;
