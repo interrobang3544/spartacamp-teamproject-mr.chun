@@ -7,10 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="owner-page.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+        rel="stylesheet" />
 
 </head>
 
 <body>
+    
+    <section class="header">
+        <nav>
+            <a href="index.html"><img src="images/logo.PNG" /></a>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="">홈</a></li>
+                    <li class="login-btn"><a href="loginsignup.html">로그인 / 회원가입</a></li>
+                    <li class="logout-btn"><a href="mypage.html">마이페이지</a></li>
+                    <li class="logout-btn">
+                        <a href="#" onclick="logout()">로그아웃</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    
     <div class="container">
         <header>주문 확인</header>
 
@@ -97,6 +117,7 @@
             </form>
         </div>
     </div>
+</section>
 </body>
 
 </html>

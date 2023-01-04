@@ -1,142 +1,221 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     outline: none;
     font-family: 'Noto Sans KR', sans-serif;
 }
-body{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  overflow: hidden;
+
+.header {
+    min-height: 100vh;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    background-color: #fff;
 }
-.container{
-  width: 330px;
-  background: rgb(37, 99, 110);
-  text-align: center;
-  border-radius: 5px;
-  padding: 50px 35px 10px 35px;
+
+.header nav {
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 2%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
 }
-.container header{
-  font-size: 35px;
-  font-weight: 600;
-  margin: 0 0 30px 0;
+
+.nav img {
+    width: 1;
+    height: 1;
 }
-.container .form-outer{
-  width: 100%;
-  overflow: hidden;
+
+.nav-links {
+    flex: 10;
+    text-align: right;
+    padding-bottom: 26px;
 }
-.container .form-outer form{
-  display: flex;
-  width: 400%;
+
+.nav-links ul li {
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
 }
-.form-outer form .page{
-  width: 25%;
-  transition: margin-left 0.3s ease-in-out;
+
+.nav-links ul li a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 13px;
 }
-.form-outer form .page .title{
-  text-align: left;
-  font-size: 25px;
-  font-weight: 500;
+
+.nav-links ul li::after {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #4070f4;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
 }
-.form-outer form .page .field{
-  width: 330px;
-  height: 45px;
-  margin: 45px 0;
-  display: flex;
-  position: relative;
+
+.nav-links ul li:hover::after {
+    width: 100%;
 }
-form .page .field .label{
-  position: absolute;
-  top: -30px;
-  font-weight: 500;
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
 }
-form .page .field input{
-  height: 100%;
-  width: 100%;
-  border: 1px solid lightgrey;
-  border-radius: 5px;
-  padding-left: 15px;
-  font-size: 18px;
+
+.container {
+    width: 330px;
+    background: rgb(37, 99, 110);
+    text-align: center;
+    border-radius: 5px;
+    padding: 50px 35px 10px 35px;
 }
-form .page .field select{
-  width: 100%;
-  padding-left: 10px;
-  font-size: 17px;
-  font-weight: 500;
+
+.container header {
+    font-size: 35px;
+    font-weight: 600;
+    margin: 0 0 30px 0;
 }
-form .page .field button{
-  width: 100%;
-  height: calc(100% + 5px);
-  border: none;
-  background: #4070f4;
-  margin-top: -20px;
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: 0.5s ease;
+
+.container .form-outer {
+    width: 100%;
+    overflow: hidden;
 }
-form .page .field button:hover{
-  background: #000;
+
+.container .form-outer form {
+    display: flex;
+    width: 400%;
 }
-.container .progress-bar{
-  display: flex;
-  margin: 40px 0;
-  user-select: none;
+
+.form-outer form .page {
+    width: 25%;
+    transition: margin-left 0.3s ease-in-out;
 }
-.container .progress-bar .step{
-  text-align: center;
-  width: 100%;
-  position: relative;
+
+.form-outer form .page .title {
+    text-align: left;
+    font-size: 25px;
+    font-weight: 500;
 }
-.container .progress-bar .step p{
-  font-weight: 500;
-  font-size: 14px;
- /* 상태 글씨 색깔 여기서 바꾸시면 됩니다! */
-  color: #000;
-  margin-bottom: 8px;
+
+.form-outer form .page .field {
+    width: 330px;
+    height: 45px;
+    margin: 45px 0;
+    display: flex;
+    position: relative;
 }
-.progress-bar .step .bullet{
-  height: 25px;
-  width: 25px;
-/* 상태 동그라미 색깔 여기서 바꾸시면 됩니다! */
-  border: 2px solid rgba(0, 0, 0, 0.945);
-  display: inline-block;
-  border-radius: 50%;
-  position: relative;
-  transition: 0.2s;
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 25px;
+
+form .page .field .label {
+    position: absolute;
+    top: -30px;
+    font-weight: 500;
 }
-.progress-bar .step .bullet span{
-  position: absolute;
-  /* 상태 숫자 색깔 여기서 바꾸시면 됩니다! */
-  color:#000000;
-  left: 50%;
-  transform: translateX(-50%);
+
+form .page .field input {
+    height: 100%;
+    width: 100%;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding-left: 15px;
+    font-size: 18px;
 }
-.progress-bar .step .bullet.active span{
-  display: none;
+
+form .page .field select {
+    width: 100%;
+    padding-left: 10px;
+    font-size: 17px;
+    font-weight: 500;
 }
+
+form .page .field button {
+    width: 100%;
+    height: calc(100% + 5px);
+    border: none;
+    background: #4070f4;
+    margin-top: -20px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: 0.5s ease;
+}
+
+form .page .field button:hover {
+    background: #000;
+}
+
+.container .progress-bar {
+    display: flex;
+    margin: 40px 0;
+    user-select: none;
+}
+
+.container .progress-bar .step {
+    text-align: center;
+    width: 100%;
+    position: relative;
+}
+
+.container .progress-bar .step p {
+    font-weight: 500;
+    font-size: 14px;
+    /* 상태 글씨 색깔 여기서 바꾸시면 됩니다! */
+    color: #000;
+    margin-bottom: 8px;
+}
+
+.progress-bar .step .bullet {
+    height: 25px;
+    width: 25px;
+    /* 상태 동그라미 색깔 여기서 바꾸시면 됩니다! */
+    border: 2px solid rgba(0, 0, 0, 0.945);
+    display: inline-block;
+    border-radius: 50%;
+    position: relative;
+    transition: 0.2s;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 25px;
+}
+
+.progress-bar .step .bullet span {
+    position: absolute;
+    /* 상태 숫자 색깔 여기서 바꾸시면 됩니다! */
+    color: #000000;
+    font-size: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.progress-bar .step .bullet.active span {
+    display: none;
+}
+
 .progress-bar .step .bullet:before,
-.progress-bar .step .bullet:after{
-  position: absolute;
-  content: '';
-  bottom: 11px;
-  right: -40px;
-  height: 3px;
-  width: 38px;
-  background: #252525;
+.progress-bar .step .bullet:after {
+    position: absolute;
+    content: '';
+    bottom: 11px;
+    right: -37px;
+    height: 3.5px;
+    width: 32px;
+    background: #252525;
 }
+
 .progress-bar .step:last-child .bullet:before,
-.progress-bar .step:last-child .bullet:after{
-  display: none;
+.progress-bar .step:last-child .bullet:after {
+    display: none;
 }
