@@ -56,37 +56,47 @@ function getSelf(callback) {
     });
 }
 
-function loadFile(input) {
-  console.log("input:", input.files[0])
+// 서비스 신청
+function applyService() {
+  const phoneNumber = document.getElementById('inputPhoneNumber').value;
+  const address = document.getElementById('inputAddress').value;
+  const image = " ";
+  const customerRequest = document.getElementById('inputCustomerRequest').value;
+
+  getSelf(function (response) {
+    if (phoneNumber !== response.phoneNumber || address !== response.address) {
+      // 유저 정보 수정
+    }
+  })
+
   axios
-    .post('api/services/uploadImage')
+    .post('api/services', {
+      image: image,
+      customerRequest: customerRequest,
+    },{
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
     .then((response) => {
-      console.log('response:', response);
+      console.log(response)
     })
     .catch((error) => {
-      alert('알 수 없는 문제가 발생했습니다. 관리자에게 문의하세요.');
+      console.log(error)
     });
+}
 
-  //선택된 파일 가져오기
-  const file = input.files[0];
+let imageSrc = ""
 
-  //미리 만들어 놓은 div에 text(파일 이름) 추가
-  // var name = document.getElementById('fileName');
-  // name.textContent = file.name;
+function loadFile(input) {
+  console.log("input:", input.files[0])
 
-  //새로운 이미지 div 추가
-  // var newImage = document.createElement("img");
-  // newImage.setAttribute("class", 'img');
+  let file = input.files[0];
 
-  //이미지 source 가져오기
-  // newImage.src = URL.createObjectURL(file);
+  let newImage = document.getElementById("image");
+  newImage.src = URL.createObjectURL(file);
 
-  // newImage.style.width = "70%";
-  // newImage.style.height = "70%";
-  // newImage.style.visibility = "hidden";   //버튼을 누르기 전까지는 이미지를 숨긴다
-  // newImage.style.objectFit = "contain";
-
-  //이미지를 image-show div에 추가
-  // var container = document.getElementById('image-show');
-  // container.appendChild(newImage);
+  newImage.style.width = "100%";
+  newImage.style.height = "100%";
+  newImage.style.objectFit = "contain";
 }

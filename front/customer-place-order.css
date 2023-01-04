@@ -122,21 +122,19 @@
     transition: all 0.2s ease;
 }
 
-/* 이미지 첨부 */
-/* .input-image-field {
+.input-image-field {
+    margin-top: 30px; 
+    padding: 20px;
     border-radius: 10px;
     border: 2px solid #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    
 }
-.input-image-field label {
-    cursor: pointer;
-    font-size: 1em;
+
+#image-show {
+    width: 100%;
+    height: 200px;
+    padding: 20px;
 }
-#chooseFile {
-    visibility: hidden;
-} */
 
 .form .text{
     color: #333;

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Service, User } = require('../models');
 const authMiddleware = require('../middlewares/auth-middleware');
+const { upload } = require("../middlewares/image-upload-middleware");
 const { Op } = require('sequelize');
 
 // POST - 서비스 신청
@@ -31,12 +32,9 @@ router.post('/', authMiddleware, async (req, res) => {
 })
 
 // 이미지 업로드
-const { upload } = require("../middlewares/image-upload-middleware");
-router.post("/uploadImage", upload.single("chooseFile"), async (req, res) => {
 
-  const imgfile = req.file;
-  console.log('imgfile:', imgfile);
-
+router.post("/upload", upload.single("userfile"), async (req, res) => {
+  console.log(req.file);
 });
 
 // GET - 서비스 조회

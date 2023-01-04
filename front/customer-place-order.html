@@ -53,60 +53,65 @@
           <div class="form signup">
             <span class="title">빨래 신청하기</span>
 
-            <form action="#">
-              <div class="input-field">
-                <input
-                  id="inputNickname"
-                  type="text"
-                  placeholder="닉네임을 입력하세요"
-                  readonly
-                  required
-                />
-                <i class="uil uil-user"></i>
-              </div>
-              <div class="input-field">
-                <input
-                  id="inputPhoneNumber"
-                  type="text"
-                  placeholder="전화번호를 입력하세요"
-                  required
-                />
-                <i class="uil uil-phone icon"></i>
-              </div>
-              <div class="input-field">
-                <input
-                  id="inputAddress"
-                  type="text"
-                  placeholder="주소를 입력하세요"
-                  required
-                />
-                <i class="uil uil-home icon"></i>
-              </div>
-              <div class="input-field">
-                <input
-                  id="inputCustomerRequest"
-                  type="text"
-                  placeholder="요청사항을 입력하세요"
-                  required
-                />
-                <i class="uil uil-comment-dots"></i>
-              </div>
-              <div class="input-field input-image-field">
-                <form method="post" action="/api/services/upload" enctype="multipart/form-data">
-                  <!-- <div class="button">
-                    <label for="chooseFile"> 세탁물 사진 첨부하기 </label>
-                  </div> -->
+            <form
+              action="/api/services/upload"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <div class="form-group">
+                <div class="input-field">
+                  <input
+                    id="inputNickname"
+                    type="text"
+                    placeholder="닉네임을 입력하세요"
+                    readonly
+                    required
+                  />
+                  <i class="uil uil-user"></i>
+                </div>
+                <div class="input-field">
+                  <input
+                    id="inputPhoneNumber"
+                    type="text"
+                    placeholder="전화번호를 입력하세요"
+                    required
+                  />
+                  <i class="uil uil-phone icon"></i>
+                </div>
+                <div class="input-field">
+                  <input
+                    id="inputAddress"
+                    type="text"
+                    placeholder="주소를 입력하세요"
+                    required
+                  />
+                  <i class="uil uil-home icon"></i>
+                </div>
+                <div class="input-field">
+                  <input
+                    id="inputCustomerRequest"
+                    type="text"
+                    placeholder="요청사항을 입력하세요"
+                  />
+                  <i class="uil uil-comment-dots"></i>
+                </div>
+                <div class="input-image-field">
+                  <div id="image-show">
+                    <img id="image"/>
+                  </div>
                   <input
                     type="file"
-                    id="chooseFile"
-                    name="chooseFile"
+                    name="userfile"
                     onchange="loadFile(this)"
                   />
-                </form>
-              </div>
-
-              <div class="input-field button">
-                <input type="button" value="신청하기" />
+                </div>
+                <div class="input-field button">
+                  <input
+                    type="submit"
+                    onclick="applyService()"
+                    value="신청하기"
+                  />
+                </div>
               </div>
             </form>
           </div>

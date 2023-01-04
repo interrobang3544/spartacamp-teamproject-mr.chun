@@ -20,12 +20,12 @@ const upload = multer({
   storage: multer.diskStorage({
     //폴더위치 지정
     destination: (req, file, done) => {
-      done(null, "front/uploadImages");
+      done(null, "./front/uploadImages");
     },
     filename: (req, file, done) => {
       const ext = path.extname(file.originalname);
       // aaa.txt => aaa+&&+129371271654.txt
-      const fileName = path.basename(file.originalname, ext) + "-" + Date.now() + ext;
+      const fileName = Date.now() + "-" + path.basename(file.originalname, ext) + ext;
       done(null, fileName);
     },
   }),
