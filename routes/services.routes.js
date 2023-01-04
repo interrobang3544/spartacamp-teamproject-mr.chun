@@ -30,6 +30,14 @@ router.post('/', authMiddleware, async (req, res) => {
   }
 })
 
+// 이미지 업로드
+const { upload } = require("../middlewares/image-upload-middleware");
+router.post("/uploadImage", upload.single("chooseFile"), async (req, res) => {
+
+  const imgfile = req.file;
+  console.log('imgfile:', imgfile);
+
+});
 
 // GET - 서비스 조회
 // 사장님 마이페이지에서 현재 진행중인 세탁 서비스 조회

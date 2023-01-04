@@ -122,6 +122,22 @@
     transition: all 0.2s ease;
 }
 
+/* 이미지 첨부 */
+/* .input-image-field {
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input-image-field label {
+    cursor: pointer;
+    font-size: 1em;
+}
+#chooseFile {
+    visibility: hidden;
+} */
+
 .form .text{
     color: #333;
     font-size: 14px;

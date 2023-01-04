@@ -84,21 +84,25 @@
               </div>
               <div class="input-field">
                 <input
-                  id="inputImage"
-                  type="text"
-                  placeholder="상세주소를 입력하세요"
-                  required
-                />
-                <i class="uil uil-image"></i>
-              </div>
-              <div class="input-field">
-                <input
                   id="inputCustomerRequest"
                   type="text"
                   placeholder="요청사항을 입력하세요"
                   required
                 />
                 <i class="uil uil-comment-dots"></i>
+              </div>
+              <div class="input-field input-image-field">
+                <form method="post" action="/api/services/upload" enctype="multipart/form-data">
+                  <!-- <div class="button">
+                    <label for="chooseFile"> 세탁물 사진 첨부하기 </label>
+                  </div> -->
+                  <input
+                    type="file"
+                    id="chooseFile"
+                    name="chooseFile"
+                    onchange="loadFile(this)"
+                  />
+                </form>
               </div>
 
               <div class="input-field button">
