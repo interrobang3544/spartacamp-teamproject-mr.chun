@@ -55,17 +55,21 @@ class UserService {
   };
 
   findUserByPk = async (userId) => {
-    const user = await this.userRepository.findUserByPk(userId)
+    const user = await this.userRepository.findUserByPk(userId);
     return {
       nickname: user.nickname,
       phoneNumber: user.phoneNumber,
       address: user.address,
-      point: user.point
-    }
-  }
+      point: user.point,
+    };
+  };
 
   updateUserInfoByPk = async (userId, phoneNumber, address) => {
-    const updatedUserData = await this.userRepository.updateUserInfoByPk(userId, phoneNumber, address);
+    const updatedUserData = await this.userRepository.updateUserInfoByPk(
+      userId,
+      phoneNumber,
+      address
+    );
     return {
       nickname: updatedUserData.nickname,
       phoneNumber: updatedUserData.phoneNumber,
@@ -74,7 +78,7 @@ class UserService {
       createdAt: updatedUserData.createdAt,
       updatedAt: updatedUserData.updatedAt,
     };
-  }
+  };
 
   deleteUserByPk = async (userId) => {
     const deletedUserData = await this.userRepository.deleteUserByPk(userId);
@@ -86,7 +90,7 @@ class UserService {
       createdAt: deletedUserData.createdAt,
       updatedAt: deletedUserData.updatedAt,
     };
-  }
+  };
 }
 
 module.exports = UserService;

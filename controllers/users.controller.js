@@ -155,7 +155,7 @@ class UsersController {
         errorMessage: '회원 정보 조회에 실패하였습니다.',
       });
     }
-  }
+  };
 
   updateUser = async (req, res, next) => {
     const { userId } = res.locals.user;
@@ -195,7 +195,11 @@ class UsersController {
       // -> 자기자신의 것이 아닌 마이페이지를 보고 있을 리 없으므로 이 가능성도 스킵
 
       // 200
-      const user = await this.userService.updateUserInfoByPk(userId, phoneNumber, address);
+      const user = await this.userService.updateUserInfoByPk(
+        userId,
+        phoneNumber,
+        address
+      );
       return res.status(200).json({
         message: '회원 정보 수정이 완료되었습니다.',
       });
@@ -205,7 +209,7 @@ class UsersController {
         errorMessage: '회원 정보 수정에 실패하였습니다.',
       });
     }
-  }
+  };
 
   deleteUser = async (req, res, next) => {
     const { userId } = res.locals.user;
@@ -220,7 +224,7 @@ class UsersController {
         errorMessage: '예기치 못한 문제로 탈퇴 처리에 실패하였습니다.',
       });
     }
-  }
+  };
 }
 
 module.exports = UsersController;

@@ -2,8 +2,28 @@
 const { Service } = require('../models');
 const { Op } = require('sequelize');
 
-// 2. ServiceRepository 클래스 만들기
-class ServiceRepository {
+// 2. ServicesRepository 클래스 만들기
+class ServicesRepository {
+  // 서비스 데이터 생성
+  createService = async (image, customerRequest, customerId) => {
+    const createdService = await Service.create({
+      image,
+      customerRequest,
+      customerId,
+    });
+    return createdService;
+  };
+
+  // 손님 id로 해당 손님의 서비스 조회 - 사장님과 손님 데이터 붙여서
+  findServicesByCustomerIdJoined = async (customerId) => {
+    const services = await Service.findAll({
+      include: ['owner', 'customer'],
+      where: { customerId },
+      order: [['serviceId', 'DESC']],
+    });
+    return services;
+  };
+
   // '사장님이' '진행중인' 세탁 서비스 하나 조회
   findOngoingServiceByOwnerId = async (ownerId) => {
     const service = await Service.findOne({
@@ -53,4 +73,4 @@ class ServiceRepository {
 }
 
 // 3. ServiceRepository 내보내기.
-module.exports = ServiceRepository;
+module.exports = ServicesRepository;
