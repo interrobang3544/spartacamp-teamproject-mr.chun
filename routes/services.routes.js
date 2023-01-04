@@ -23,14 +23,14 @@ try {
     image, customerRequest,
     customerId: userId})
     return res.status(200).json({
-      message: ' 세탁 등록'
+      message: '세탁 서비스 신청이 등록되었습니다.'
     })
-} catch(error){
-  console.log(error.message);
-  return res.status(400).json({
-    errorMessage: '데이터 형식이 올바르지 않습니다.'
-  })
-}
+  } catch (error) {
+    console.log(error.message);
+    return res.status(400).json({
+      errorMessage: '데이터 형식이 올바르지 않습니다.'
+    })
+  }
 })
 
 
@@ -68,11 +68,23 @@ router.get('/customer', authMiddleware, async (req, res) => {
 // “status”: “수거 중”,
 // "createdAt": "2022-07-25T07:45:56.000Z",
 // "updatedAt": "2022-07-25T07:45:56.000Z"}
-router.get('/:serviceId', authMiddleware, async (req, res) => {
-  const { serviceId } = req.params;
-  const user = res.locals.user;
-  // 외래키가 설정된 상태에서 조인하기
-  // + 다른 '컬럼명'으로 가져오기 (안되면 재빠르게 그냥 노가다로 새 객체 만들어서 반환하기)
+router.get('/owner/mypage', authMiddleware, async (req, res) => {
+  const { userId } = res.locals.user;
+  const myService = await getMyService(userId);
+
+  // 404 Not Found
+  // 현재 진행중인 서비스가 없는 경우
+  if (!myService) {
+    console.log('현재 진행중 서비스 없음 탈출.');
+    return res.status(404).json({
+      errorMessage: '현재 진행중인 세탁 서비스가 없습니다.',
+    });
+  }
+
+  // 현재 진행중인 서비스가 있는 경우
+  const { serviceId } = myService.dataValues;
+  console.log('serviceId : ', serviceId);
+
   try {
     const serviceDetail = await Service.findOne({
       // raw: true,
@@ -122,12 +134,8 @@ router.get('/:serviceId', authMiddleware, async (req, res) => {
       status: serviceDetail.status,
       createdAt: serviceDetail.createdAt,
       updatedAt: serviceDetail.updatedAt,
+      ownerNickname: serviceDetail.owner ? serviceDetail.owner.nickname : '',
     };
-    if (serviceDetail.owner) {
-      data.ownerNickname = serviceDetail.owner.nickname;
-    } else {
-      data.ownerNickname = '';
-    }
 
     return res.status(200).json({
       data,
@@ -140,35 +148,37 @@ router.get('/:serviceId', authMiddleware, async (req, res) => {
   }
 });
 
-// PUT - 서비스 수정
-// 사장님 마이페이지에서 현재 진행중인 세탁 서비스 상태 수정
-// - 요청 예시: { “status”: “수거 완료”}
-// - 응답 예시: {” message”: “세탁 상태를 업데이트 하였습니다” }
+// (사장님이)이미 진행중인 세탁 서비스 조회
+async function getMyService(ownerId) {
+  const myService = await Service.findOne({
+    where: {
+      ownerId: ownerId,
+      status: { [Op.ne]: '배송 완료' },
+    },
+  });
+  // console.log("myService: ", myService)
+  // myService 자체가 null일 수 있으므로 myService.dataValues를 반환하면 안 됨.
+  return myService;
+}
+
+// PUT - 서비스 픽업
+// 대기 중 서비스 목록 중에서 사장님이 서비스 픽업
+// 서비스의 'ownerId'와 'status' 항목 수정.
 router.put('/:serviceId', authMiddleware, async (req, res) => {
   const { serviceId } = req.params;
-  const { status } = req.body;
-  const { userId } = res.locals.user;
+  const { userId, userType } = res.locals.user;
 
-  // status가 안 들어왔으면 에러 되돌리기
-  //
-  if (!status) {
-    return res.status(412).json({
-      errorMessage: '데이터 형식이 올바르지 않습니다.',
+  // 유저 타입이 '사장님(1)'이 아닌 경우 (혹시 모르니)
+  if (!userType) {
+    return res.status(401).json({
+      errorMessage: '"사장님"만 서비스를 픽업할 수 있습니다.',
     });
   }
 
-  //
   // 세탁 서비스 목록에서 픽업하려는데 이미 진행 중인 세탁물이 있는 경우
-  // 1. Services 테이블 전체에서 ownerId가 사장님이고 status가 '배송 완료'가 아닌
-  //  세탁 서비스가 있다면 이 사장님이 진행중인 세탁물이 있다는 뜻일 것임.
-  // 2. 아니면 사장님마다 '진행중인 세탁물' 컬럼을 따로 만들어야 하나...
   try {
-    const alreadyHasOne = await Service.findOne({
-      where: {
-        ownerId: userId,
-        status: { [Op.ne]: '배송 완료' },
-      },
-    });
+    const alreadyHasOne = await getMyService(userId);
+    console.log(alreadyHasOne);
     if (alreadyHasOne) {
       return res.status(400).json({
         errorMessage: '이미 진행중인 세탁 서비스가 있습니다.',
@@ -180,6 +190,40 @@ router.put('/:serviceId', authMiddleware, async (req, res) => {
       errorMessage: '입력한 데이터가 올바르지 않습니다.',
     });
   }
+  try {
+    const service = await Service.findByPk(serviceId);
+    service.ownerId = userId;
+    service.status = '수거 중';
+    await service.save();
+    return res.status(200).json({
+      message: `${serviceId}번 세탁물을 픽업하셨습니다.`,
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(400).json({
+      errorMessage: '세탁물 픽업에 실패하였습니다.',
+    });
+  }
+});
+
+// PUT - 서비스 수정
+// 사장님 마이페이지에서 현재 진행중인 세탁 서비스 상태 수정
+// - 요청 예시: { “status”: “수거 완료”}
+// - 응답 예시: {” message”: “세탁 상태를 업데이트 하였습니다” }
+router.put('/:serviceId/mypage', authMiddleware, async (req, res) => {
+  const { serviceId } = req.params;
+  console.log(serviceId);
+  const { status } = req.body;
+  console.log('status: ', status);
+  const { userId } = res.locals.user;
+
+  // 400 Bad Request
+  // status가 안 들어왔을 시
+  if (!status) {
+    return res.status(400).json({
+      errorMessage: '데이터 형식이 올바르지 않습니다.',
+    });
+  }
 
   // 세탁 상태 업데이트하기
   try {
@@ -188,7 +232,7 @@ router.put('/:serviceId', authMiddleware, async (req, res) => {
     // 401
     // 해당 사용자가 '수정 권한이 있는 사용자인지'도 검사해야할까?
 
-    //
+    // 400 Bad Request
     // 수거 완료 → 배송 중 → 배송 완료 의 순서로 업데이트 하지 않은 경우
     if (service.status === '대기 중' && status !== '수거 중') {
       return res.status(400).json({
@@ -213,14 +257,6 @@ router.put('/:serviceId', authMiddleware, async (req, res) => {
         errorMessage:
           '세탁 상태는 "수거 중 -> 수거 완료 → 배송 중 → 배송 완료"의 순서로 업데이트 가능합니다',
       });
-    }
-
-    // 대기 중 -> 수거 중 으로 바뀐 경우(사장님이 처음으로 맡게 되었을 때):
-    // ownerId란에 사장님 아이디 등록하기. (일단 '수거 중' 이상인 상태의 서비스들에
-    // 대해서는 매번 상태 업데이트 떄마다 사장님 id를 재등록하게 만들어 놓음.
-    // 사장님Id 정보가 들어있지 않은 데이터가 있을 수 있다는 가정 하에. )
-    if (status !== '대기 중') {
-      service.ownerId = userId;
     }
 
     service.status = status;
