@@ -5,58 +5,56 @@ const container = document.querySelector('.container'),
   login = document.querySelectorAll('.login-link');
 
 //비밀번호 가리기/보이기 + 아이콘 바뀌기
-        pwShowHide.forEach(eyeIcon => {
-            eyeIcon.addEventListener("click", () => {
+pwShowHide.forEach((eyeIcon) => {
+  eyeIcon.addEventListener('click', () => {
+    pwFields.forEach((pwField) => {
+      if (pwField.type === 'password') {
+        pwField.type = 'text';
 
-                pwFields.forEach(pwField => {
-                    if(pwField.type ==="password") {
-                        pwField.type = "text";
+        pwShowHide.forEach((icon) => {
+          icon.classList.replace('uil-eye-slash', 'uil-eye');
+        });
+      } else {
+        pwField.type = 'password';
 
-                        pwShowHide.forEach(icon => {
-                            icon.classList.replace("uil-eye-slash", "uil-eye");
-                        })
-                    }else{
-                        pwField.type = "password";
-
-                        pwShowHide.forEach(icon => {
-                            icon.classList.replace("uil-eye", "uil-eye-slash");
-                        })
-                    }
-                })
-            })
-        })
+        pwShowHide.forEach((icon) => {
+          icon.classList.replace('uil-eye', 'uil-eye-slash');
+        });
+      }
+    });
+  });
+});
 
 // // 회원가입, 로그인 폼 클릭하면 나오게 하기
-        $(document).on('click', '#signupform', function(){
-            container.classList.add("active");
-        });
-        $(document).on('click', '#loginform', function(){
-            container.classList.remove("active");
-        });
+$(document).on('click', '#signupform', function () {
+  container.classList.add('active');
+});
+$(document).on('click', '#loginform', function () {
+  container.classList.remove('active');
+});
 
 // 사장/고객 선택 버튼 작동
-var selectField = document.getElementById("selectField");
-var selectText = document.getElementById("selectText");
-var options = document.getElementsByClassName("options");
-var list = document.getElementById("list");
-var arrowIcon = document.getElementById("arrowIcon");
+var selectField = document.getElementById('selectField');
+var selectText = document.getElementById('selectText');
+var options = document.getElementsByClassName('options');
+var list = document.getElementById('list');
+var arrowIcon = document.getElementById('arrowIcon');
 
 // 선택하면 선택지 숨겨지게 하기
-selectField.onclick = function(){
-    list.classList.toggle("hide");
+selectField.onclick = function () {
+  list.classList.toggle('hide');
+  // 클릭하면 화살표 방향 바뀌게 하기
+  arrowIcon.classList.toggle('rotate');
+};
+
+for (option of options) {
+  option.onclick = function () {
+    selectText.innerHTML = this.textContent;
+    list.classList.toggle('hide');
     // 클릭하면 화살표 방향 바뀌게 하기
-    arrowIcon.classList.toggle("rotate");
+    arrowIcon.classList.toggle('rotate');
+  };
 }
-
-for(option of options){
-    option.onclick = function(){
-        selectText.innerHTML = this.textContent;
-        list.classList.toggle("hide");
-        // 클릭하면 화살표 방향 바뀌게 하기
-        arrowIcon.classList.toggle("rotate");
-    }
-}
-
 
 // 회원가입
 function sign_up() {
@@ -65,14 +63,14 @@ function sign_up() {
   const confirm = document.getElementById('inputConfirm').value;
   const phoneNumber = document.getElementById('inputPhoneNumber').value;
   const address = document.getElementById('inputAddress').value;
-	const userTypeInput = document.getElementById('selectText').innerText;
+  const userTypeInput = document.getElementById('selectText').innerText;
 
-	let userType = 2
-	if (userTypeInput === '고객님') {
-		userType = 0
-	} else if (userTypeInput === '사장님') {
-		userType = 1
-	}
+  let userType = 2;
+  if (userTypeInput === '고객님') {
+    userType = 0;
+  } else if (userTypeInput === '사장님') {
+    userType = 1;
+  }
 
   axios
     .post('api/users/signup', {
@@ -84,15 +82,14 @@ function sign_up() {
       userType: userType,
     })
     .then((response) => {
-      customAlert("회원가입을 축하드립니다!", function () {
+      customAlert('회원가입을 축하드립니다!', function () {
         window.location.replace('/loginsignup.html');
       });
     })
-		.catch(error => {
-			customAlert(error.response.data.errorMessage)
-		});
+    .catch((error) => {
+      customAlert(error.response.data.errorMessage);
+    });
 }
-
 
 // 로그인
 function sign_in() {
@@ -107,17 +104,17 @@ function sign_in() {
       localStorage.setItem('token', response.data.token);
       window.location.replace('/');
     })
-		.catch(error => {
-			customAlert(error.response.data.errorMessage)
-		});
+    .catch((error) => {
+      customAlert(error.response.data.errorMessage);
+    });
 }
 
 // 모달창
-const myModal = new bootstrap.Modal('#alertModal')
+const myModal = new bootstrap.Modal('#alertModal');
 function customAlert(text, confirmCallback) {
-	document.getElementById('modal-text').innerHTML = text
-	myModal.show()
+  document.getElementById('modal-text').innerHTML = text;
+  myModal.show();
   if (confirmCallback) {
-    $("#alertModal .btn-confirm").click(confirmCallback);
+    $('#alertModal .btn-confirm').click(confirmCallback);
   }
 }

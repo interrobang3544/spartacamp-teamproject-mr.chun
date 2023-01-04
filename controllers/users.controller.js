@@ -113,7 +113,7 @@ class UsersController {
           errorMessage: '닉네임을 입력해주세요.',
         });
         return;
-      } 
+      }
       if (!user.nickname) {
         res.status(412).send({
           errorMessage: '존재하지 않는 닉네임 입니다.',

@@ -3,9 +3,9 @@ const { User } = require('../models');
 class UserRepository {
   findUserByNickname = async (nickname) => {
     const user = await User.findOne({ raw: true, where: { nickname } });
-    if ( user === null ) {
+    if (user === null) {
       return {};
-    } 
+    }
     return user;
   };
 
@@ -26,7 +26,7 @@ class UserRepository {
       { point },
       { where: { nickname } }
     );
-    console.log(updateUserPoint)
+    console.log(updateUserPoint);
 
     return updateUserPoint;
   };
