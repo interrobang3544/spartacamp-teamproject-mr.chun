@@ -4,7 +4,9 @@
   box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
 }
-
+.header{
+  min-height: auto !important;
+}
 .body {
     overflow-y: scroll;
 }
@@ -111,9 +113,9 @@ input#rate-5:checked~label {
   color: #4070f4;
 }
 
-.container form {
+/* .container form {
   display: none;
-}
+} */
 
 input:checked~form {
   display: block;
@@ -177,6 +179,10 @@ form .btn button:hover {
   background: #4360ad;
 }
 
+
+#modify-btn{
+  display: none;
+}
 /*----------------------리뷰 조회 시작------------------------*/
 #testimonials {
     display: flex;

@@ -136,8 +136,8 @@ function applyService() {
 let imageSrc = '';
 
 function loadFile(input) {
-  console.log('input:', input.files[0]);
   // imageSrc = input.files[0];
+
   let file = input.files[0];
 
   let newImage = document.getElementById('image');

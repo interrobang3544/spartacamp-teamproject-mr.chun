@@ -34,15 +34,38 @@ class ReviewsController {
     res.status(201).json({ data: createReviewData });
   };
 
+  getReviewByServiceId = async (req, res, next) => {
+    try {
+      const { userId } = res.locals.user;
+      const { serviceId } = req.params;
+      const review = await this.reviewService.findReviewByServiceId(userId, serviceId);
+      res.status(200).json({ data: review });
+    } catch(err) {
+      res.status(401).json({ errorMessage: "리뷰가 없습니다." });
+    }
+  };
+
+  getReviewByCustomerId = async (req, res, next) => {
+    try {
+      const { userId } = res.locals.user;
+      const review = await this.reviewService.findReviewByCustomerId(userId);
+      res.status(200).json({ data: review });
+    } catch(err) {
+      res.status(401).json({ errorMessage: "리뷰가 없습니다." });
+    }
+  };
+
   updateReview = async (req, res, next) => {
-    const { reviewId } = req.params;
-    const { password, title, content } = req.body;
+    const { userId } = res.locals.user;
+    const { serviceId } = req.params;
+    const { title, content, rate } = req.body;
 
     const updateReview = await this.reviewService.updateReview(
-      reviewId,
-      password,
+      userId,
       title,
-      content
+      content,
+      rate,
+      serviceId
     );
 
     res.status(200).json({ data: updateReview });

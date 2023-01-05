@@ -39,7 +39,7 @@ function getService() {
         temp.setAttribute('class', 'container');
         temp.innerHTML = `
         <div class="box">
-          <header>주문 확인</header>
+          <header>주문 #${data.length - i}</header>
           <div class="progress-bar">
             <div class="step">
               <p>대기 중</p>

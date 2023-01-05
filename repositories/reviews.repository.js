@@ -33,6 +33,55 @@ class ReviewRepository {
     return review;
   };
 
+  findReviewByServiceId = async (customerId, serviceId) => {
+    const review = await Review.findOne({
+      raw: true,
+      include: [
+        {
+          model: Service,
+          attributes: [],
+          where: { customerId },
+          include: [
+            {
+              model: User,
+              as: 'customer',
+              attributes: [],
+            },
+          ],
+        },
+      ],
+      where: { serviceId },
+    });
+    if (review===null) {
+      review = {}
+    }
+    return review;
+  };
+
+  findReviewByCustomerId = async (customerId) => {
+    const review = await Review.findAll({
+      raw: true,
+      attributes: {
+        include: ["Service.customerId", "Service.customer.nickname"],
+      },
+      include: [
+        {
+          model: Service,
+          attributes: [],
+          where: { customerId },
+          include: [
+            {
+              model: User,
+              as: 'customer',
+              attributes: [],
+            },
+          ],
+        },
+      ],
+    });
+    return review;
+  };
+
   createReview = async (title, content, rate, serviceId) => {
     const createReviewData = await Review.create({
       title,
