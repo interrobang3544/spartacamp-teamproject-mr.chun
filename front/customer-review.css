@@ -4,7 +4,9 @@
   box-sizing: border-box;
   font-family: 'Noto Sans KR', sans-serif;
 }
-
+.header{
+  min-height: auto !important;
+}
 .body {
     overflow-y: scroll;
 }

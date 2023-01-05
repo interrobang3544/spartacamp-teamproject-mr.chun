@@ -40,9 +40,10 @@ class ReviewService {
     });
   };
 
-  findReviewByCustomerId = async (userId, serviceId) => {
-    const findReview = await this.reviewRepository.findReviewByCustomerId(
-      userId, serviceId
+  findReviewByServiceId = async (userId, serviceId) => {
+    const findReview = await this.reviewRepository.findReviewByServiceId(
+      userId,
+      serviceId
     );
 
     return {
@@ -54,6 +55,26 @@ class ReviewService {
       createdAt: findReview.createdAt,
       updatedAt: findReview.updatedAt,
     };
+  };
+
+  findReviewByCustomerId = async (userId) => {
+    const findReview = await this.reviewRepository.findReviewByCustomerId(
+      userId
+    );
+
+    return findReview.map((review) => {
+      return {
+        reviewId: review.reviewId,
+        title: review.title,
+        content: review.content,
+        rate: review.rate,
+        serviceId: review.serviceId,
+        customerId: review.customerId,
+        nickname: review.nickname,
+        createdAt: review.createdAt,
+        updatedAt: review.updatedAt,
+      };
+    });
   };
 
   createReview = async (title, content, rate, serviceId) => {
@@ -76,8 +97,9 @@ class ReviewService {
   };
 
   updateReview = async (userId, title, content, rate, serviceId) => {
-    const findReview = await this.reviewRepository.findReviewByCustomerId(
-      userId, serviceId
+    const findReview = await this.reviewRepository.findReviewByServiceId(
+      userId,
+      serviceId
     );
 
     await this.reviewRepository.updateReview(
@@ -87,8 +109,9 @@ class ReviewService {
       rate
     );
 
-    const updateReview = await this.reviewRepository.findReviewByCustomerId(
-      userId, serviceId
+    const updateReview = await this.reviewRepository.findReviewByServiceId(
+      userId,
+      serviceId
     );
 
     return {

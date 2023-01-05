@@ -33,7 +33,7 @@ class ReviewRepository {
     return review;
   };
 
-  findReviewByCustomerId = async (customerId, serviceId) => {
+  findReviewByServiceId = async (customerId, serviceId) => {
     const review = await Review.findOne({
       raw: true,
       include: [
@@ -51,6 +51,33 @@ class ReviewRepository {
         },
       ],
       where: { serviceId },
+    });
+    if (review===null) {
+      review = {}
+    }
+    return review;
+  };
+
+  findReviewByCustomerId = async (customerId) => {
+    const review = await Review.findAll({
+      raw: true,
+      attributes: {
+        include: ["Service.customerId", "Service.customer.nickname"],
+      },
+      include: [
+        {
+          model: Service,
+          attributes: [],
+          where: { customerId },
+          include: [
+            {
+              model: User,
+              as: 'customer',
+              attributes: [],
+            },
+          ],
+        },
+      ],
     });
     return review;
   };
