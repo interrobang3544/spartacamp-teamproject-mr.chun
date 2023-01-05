@@ -1,22 +1,21 @@
-// 페이지 로딩 완료 시 - 마이페이지용
+
+// 페이지 로딩 완료 시
 $(document).ready(function () {
+  // 사용자 타입(사장/고객)에 따라 보일 헤더 항목
+  if (localStorage.getItem('token')) {
+    getSelf(function (response) {
+      if ( response.userType === 0 ) {
+        // 손님 사용자라면
+        window.location.replace('/customer-place-order.html');
+        document.getElementById('service-view').href = 'customer-services.html';
+      } else {
+        // 사장님 사용자라면
+        document.getElementById('service-view').href = 'owner-page.html';
+      }
+    });
+  }
   getUser();
 });
-
-// // 사용자 타입(사장/고객)에 따라 보일 헤더 항목
-// if (localStorage.getItem('token')) {
-//   getUser();
-//   getSelf(function (response) {
-//     if ( response.userType === 0 ) {
-//       // 손님 사용자라면
-//       window.location.replace('/customer-place-order.html');
-//       document.getElementById('service-view').href = 'customer-services.html';
-//     } else if ( response.userType === 1 ) {
-//       // 사장님 사용자라면
-//       document.getElementById('service-view').href = 'owner-page.html';
-//     }
-//   });
-// }
 
 // 로그인/로그아웃 버튼
 if (localStorage.getItem('token')) {
@@ -24,6 +23,7 @@ if (localStorage.getItem('token')) {
 } else {
   document.getElementsByClassName('logout-btn')[0].style.display = 'none';
   document.getElementsByClassName('logout-btn')[1].style.display = 'none';
+  document.getElementsByClassName('logout-btn')[2].style.display = 'none';
 }
 
 // 로그아웃
@@ -149,6 +149,7 @@ function deleteUser() {
 // 모달창
 const myModal = new bootstrap.Modal('#alertModal');
 function customAlert(text) {
+  // const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
   document.getElementById('modal-text').innerHTML = text;
   myModal.show();
 }
