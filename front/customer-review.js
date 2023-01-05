@@ -4,6 +4,7 @@ if (localStorage.getItem('token')) {
       window.location.replace('/index.html');
     }
     getReview();
+    getReviewAll();
   });
   document.getElementsByClassName('login-btn')[0].style.display = 'none';
 }
@@ -29,14 +30,8 @@ const post = document.querySelector('.post');
 const widget = document.querySelector('.star-widget');
 const editBtn = document.querySelector('.edit');
 btn.onclick = () => {
-  widget.style.display = 'none';
-  post.style.display = 'block';
-
-  editBtn.onclick = () => {
-    widget.style.display = 'block';
-    post.style.display = 'none';
-  };
-  return false;
+  // widget.style.display = 'none';
+  // post.style.display = 'block';
 };
 
 // 리뷰 작성
@@ -81,14 +76,14 @@ function applyReview() {
     )
     .then((response) => {
       console.log(response);
-      window.location.replace(`customer-review.html?serviceId=${serviceId}`);
+      // window.location.replace(`customer-review.html?serviceId=${serviceId}`);
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error)
     });
 }
 
-// 리뷰 조회
+// 해당 서비스 리뷰 조회
 function getReview() {
   const serviceId = new URLSearchParams(window.location.search).get(
     'serviceId'
@@ -104,13 +99,14 @@ function getReview() {
       document.getElementById('btn').style.display = 'none';
       document.getElementById('modify-btn').style.display = 'block';
       document.getElementById('main-title').innerHTML =
-        '작성한 리뷰가 있습니다';
+        '작성된 리뷰입니다';
       document.getElementById('review-title').value = data.title;
       document.getElementById('review-content').value = data.content;
       document.getElementById(`star${data.rate}`).click();
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error)
+      return;
     });
 }
 
@@ -143,6 +139,60 @@ function updateReview() {
     });
 }
 
+
+// 리뷰 전체 조회
+function getReviewAll() {
+  axios
+    .get(`api/reviews/customer`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
+    .then((response) => {
+      const { data } = response.data
+      console.log(data)
+
+      for (let i=0; i<data.length; i++) {
+        const temp = document.createElement('div');
+        temp.setAttribute('class', 'testimonial-box');
+        temp.innerHTML = `
+        <div class="box-top">
+            <div class="profile">
+                <div class="name-user">
+                    <strong>${data[i].nickname}</strong>
+                </div>
+            </div>
+  
+            <div id="test" class="reviews">
+                <i id="review${i}-star1" class="fa-regular fa-star"></i>
+                <i id="review${i}-star2" class="fa-regular fa-star"></i>
+                <i id="review${i}-star3" class="fa-regular fa-star"></i>
+                <i id="review${i}-star4" class="fa-regular fa-star"></i>
+                <i id="review${i}-star5" class="fa-regular fa-star"></i>
+            </div>
+        </div>
+  
+        <div class="client-comment">
+            <p>${data[i].content}</p>
+        </div>
+
+        <div class="field">
+        <button class="firstNext next" onclick="location.href='customer-review.html?serviceId=${data[i].serviceId}'">수정</button>
+        </div>`;
+        document.getElementById('testimonial-box-container').append(temp);
+        
+        for (let j=0; j<data[i].rate; j++) {
+          let star = document.getElementById(`review${i}-star${j+1}`)
+          star.classList.replace("fa-regular", "fa-solid")
+        }
+      }
+    })
+    .catch((error) => {
+      console.log(error)
+    });
+}
+
+
 // 사용자 정보 조회
 function getSelf(callback) {
   axios
@@ -161,6 +211,7 @@ function getSelf(callback) {
         localStorage.clear();
         alert('알 수 없는 문제가 발생했습니다. 관리자에게 문의하세요.');
       }
-      window.location.href = '/';
+      window.location.href = '/index.html';
     });
 }
+
