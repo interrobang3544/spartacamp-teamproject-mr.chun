@@ -23,18 +23,21 @@ class ReviewService {
     });
   };
 
-  findReviewById = async (reviewId) => {
-    const findReview = await this.reviewRepository.findReviewById(reviewId);
+  findReviewByOwnerId = async (userId) => {
+    const findReview = await this.reviewRepository.findReviewByOwnerId(userId);
 
-    return {
-      reviewId: findReview.reviewId,
-      title: findReview.title,
-      content: findReview.content,
-      rate: findReview.rate,
-      serviceId: findReview.serviceId,
-      createdAt: findReview.createdAt,
-      updatedAt: findReview.updatedAt,
-    };
+    return findReview.map((review) => {
+      return {
+        reviewId: review.reviewId,
+        title: review.title,
+        content: review.content,
+        rate: review.rate,
+        serviceId: review.serviceId,
+        customerNickname: review.nickname,
+        createdAt: review.createdAt,
+        updatedAt: review.updatedAt,
+      };
+    });
   };
 
   createReview = async (title, content, rate, serviceId) => {

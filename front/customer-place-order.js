@@ -60,12 +60,13 @@ function getSelf(callback) {
 function applyService() {
   const phoneNumber = document.getElementById('inputPhoneNumber').value;
   const address = document.getElementById('inputAddress').value;
-  const image = " ";
+  const image = `./uploadImages/${imageSrc.name}`;
   const customerRequest = document.getElementById('inputCustomerRequest').value;
 
   getSelf(function (response) {
     if (phoneNumber !== response.phoneNumber || address !== response.address) {
       // 유저 정보 수정
+      customAlert('정보 수정')
     }
   })
 
@@ -90,7 +91,7 @@ let imageSrc = ""
 
 function loadFile(input) {
   console.log("input:", input.files[0])
-
+  imageSrc = input.files[0];
   let file = input.files[0];
 
   let newImage = document.getElementById("image");

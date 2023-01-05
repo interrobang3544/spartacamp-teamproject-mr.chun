@@ -1,4 +1,6 @@
 const { Review } = require('../models');
+const { Service } = require('../models');
+const { User } = require('../models');
 
 class ReviewRepository {
   findAllReview = async () => {
@@ -7,9 +9,27 @@ class ReviewRepository {
     return reviews;
   };
 
-  findReviewById = async (reviewId) => {
-    const review = await Review.findByPk(reviewId);
-
+  findReviewByOwnerId = async (ownerId) => {
+    const review = await Review.findAll({
+      raw: true,
+      attributes: {
+        include: ["Service.customerId", "Service.customer.nickname"],
+      },
+      include: [
+        {
+          model: Service,
+          attributes: [],
+          where: { ownerId },
+          include: [
+            {
+              model: User,
+              as: 'customer',
+              attributes: [],
+            },
+          ],
+        },
+      ],
+    });
     return review;
   };
 
