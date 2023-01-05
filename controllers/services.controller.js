@@ -12,7 +12,8 @@ class ServicesController {
 
     // 400 Bad Request
     // body 데이터가 안 들어왔을 시
-    if (!image) { // customerRequest는 없을 수 있다.
+    if (!image) {
+      // customerRequest는 없을 수 있다.
       return res.status(400).json({
         errorMessage: '데이터 형식이 올바르지 않습니다.',
       });

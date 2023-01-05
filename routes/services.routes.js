@@ -18,8 +18,8 @@ router.put(
 router.post('/', authMiddleware, servicesController.request);
 router.get('/customer', authMiddleware, servicesController.customerInfo);
 
-const { upload } = require("../middlewares/image-upload-middleware");
-router.post("/upload", upload.single("userfile"), async (req, res) => {
+const { upload } = require('../middlewares/image-upload-middleware');
+router.post('/upload', upload.single('userfile'), async (req, res) => {
   console.log(req.file);
 });
 

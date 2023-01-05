@@ -150,7 +150,7 @@ class UsersController {
       user,
     });
   };
-  
+
   getUser = async (req, res, next) => {
     const { userId } = res.locals.user;
     try {

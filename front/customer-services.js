@@ -23,7 +23,7 @@ function customAlert(text, confirmCallback) {
   }
 }
 
-getService()
+getService();
 // 손님 서비스 조회
 function getService() {
   axios
@@ -33,8 +33,8 @@ function getService() {
       },
     })
     .then((response) => {
-      const { data } = response.data
-      for (let i=0; i<data.length; i++) {
+      const { data } = response.data;
+      for (let i = 0; i < data.length; i++) {
         const temp = document.createElement('div');
         temp.setAttribute('class', 'container');
         temp.innerHTML = `
@@ -78,30 +78,45 @@ function getService() {
                 <div class="title">고객님의 주문</div>
                 <div class="field">
                   <div class="label">서비스 신청 일시</div>
-                  <input type="text" placeholder="날짜: ${data[i].createdAt.split('.')[0].split('T').join("  시간: ")}" readonly />
+                  <input type="text" placeholder="날짜: ${data[i].createdAt
+                    .split('.')[0]
+                    .split('T')
+                    .join('  시간: ')}" readonly />
                 </div>
                 <div class="field">
                   <div class="label">요청사항</div>
-                  <input type="text" placeholder="${data[i].customerRequest}" readonly />
+                  <input type="text" placeholder="${
+                    data[i].customerRequest
+                  }" readonly />
                 </div>
                 <div class="title-and-btn">
                   <div class="title">담당 사장님</div>
                   <div class="btn-list">
-                  <button type="button" onclick="location.href='owner-review.html?userId=${data[i].ownerId}'" class="btn btn-primary">리뷰 조회</button>
-                  <button type="button" id="review${i}" onclick="location.href='customer-review.html?serviceId=${data[i].serviceId}'" class="btn btn-primary hide">리뷰 쓰기</button>
+                  <button type="button" onclick="location.href='owner-review.html?userId=${
+                    data[i].ownerId
+                  }'" class="btn btn-primary">리뷰 조회</button>
+                  <button type="button" id="review${i}" onclick="location.href='customer-review.html?serviceId=${
+          data[i].serviceId
+        }'" class="btn btn-primary hide">리뷰 쓰기</button>
                   </div>
                 </div>
                 <div class="field">
                   <div class="label">닉네임</div>
-                  <input type="text" placeholder="${data[i].ownerNickname}" readonly />
+                  <input type="text" placeholder="${
+                    data[i].ownerNickname
+                  }" readonly />
                 </div>
                 <div class="field">
                   <div class="label">전화번호</div>
-                  <input type="text" placeholder="${data[i].ownerPhoneNumber}" readonly />
+                  <input type="text" placeholder="${
+                    data[i].ownerPhoneNumber
+                  }" readonly />
                 </div>
                 <div class="field">
                   <div class="label">주소</div>
-                  <input type="text" placeholder="${data[i].ownerAddress}" readonly />
+                  <input type="text" placeholder="${
+                    data[i].ownerAddress
+                  }" readonly />
                 </div>
               </div>
             </form>
@@ -109,26 +124,28 @@ function getService() {
         </div>`;
         document.getElementById('container-list').append(temp);
 
-        let status = data[i].status
-        if (status === "대기 중") {
-          status = 1
-        } else if (status === "수거 중") {
-          status = 2
-        } else if (status === "수거 완료") {
-          status = 3
-        } else if (status === "배송 중") {
-          status = 4
-        } else if (status === "배송 완료") {
-          status = 5
-          document.getElementById(`review${i}`).classList.replace("hide", "show")
+        let status = data[i].status;
+        if (status === '대기 중') {
+          status = 1;
+        } else if (status === '수거 중') {
+          status = 2;
+        } else if (status === '수거 완료') {
+          status = 3;
+        } else if (status === '배송 중') {
+          status = 4;
+        } else if (status === '배송 완료') {
+          status = 5;
+          document
+            .getElementById(`review${i}`)
+            .classList.replace('hide', 'show');
         }
-        for (j=0; j<status; j++) {
-          document.getElementById(`span${i}-${j+1}`).innerHTML = "✓"
+        for (j = 0; j < status; j++) {
+          document.getElementById(`span${i}-${j + 1}`).innerHTML = '✓';
         }
       }
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
     });
 }
 

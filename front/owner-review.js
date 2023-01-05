@@ -23,9 +23,9 @@ function getReview() {
       },
     })
     .then((response) => {
-      const { data } = response.data
+      const { data } = response.data;
 
-      for (let i=0; i<data.length; i++) {
+      for (let i = 0; i < data.length; i++) {
         const temp = document.createElement('div');
         temp.setAttribute('class', 'testimonial-box');
         temp.innerHTML = `
@@ -49,17 +49,17 @@ function getReview() {
             <p>${data[i].content}</p>
         </div>`;
         document.getElementById('testimonial-box-container').append(temp);
-        
-        for (let j=0; j<data[i].rate; j++) {
-          console.log(i, j)
-          console.log(document.getElementById(`review${i}-star${j+1}`))
-          let star = document.getElementById(`review${i}-star${j+1}`)
-          star.classList.replace("fa-regular", "fa-solid")
+
+        for (let j = 0; j < data[i].rate; j++) {
+          console.log(i, j);
+          console.log(document.getElementById(`review${i}-star${j + 1}`));
+          let star = document.getElementById(`review${i}-star${j + 1}`);
+          star.classList.replace('fa-regular', 'fa-solid');
         }
       }
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
     });
 }
 

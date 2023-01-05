@@ -79,7 +79,7 @@ function modifyUser(phoneNumber, address) {
       authorization: `Bearer ${localStorage.getItem('token')}`,
     },
     success: function (response) {
-      console.log('modify success response: ', response)
+      console.log('modify success response: ', response);
       customAlert2('회원 정보 수정을 완료했습니다. 다시 등록을 진행해주세요');
     },
     error: function (xhr) {
@@ -101,13 +101,14 @@ function applyService() {
   getSelf(function (response) {
     if (phoneNumber !== response.phoneNumber || address !== response.address) {
       // 유저 정보 수정
-      modifyUser(phoneNumber, address)
+      modifyUser(phoneNumber, address);
       // customAlert2( // 이게 왜 안뜨지..
       //     '입력하신 정보로 회원 정보가 업데이트 되었습니다.'
       //   // '입력하신 정보로 회원 정보를 업데이트한 후 계속 진행하실 수 있습니다. 해당 주소와 전화 번호로 회원 정보를 업데이트 하시겠습니까?'
       // );
       // return;
-    } else { // 모달창이 두번 연속으로는 안 떠서 굳이 따로 작동하게 만듬.
+    } else {
+      // 모달창이 두번 연속으로는 안 떠서 굳이 따로 작동하게 만듬.
       axios
         .post(
           'api/services',
