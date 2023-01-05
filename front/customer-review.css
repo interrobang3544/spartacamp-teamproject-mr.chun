@@ -111,9 +111,9 @@ input#rate-5:checked~label {
   color: #4070f4;
 }
 
-.container form {
+/* .container form {
   display: none;
-}
+} */
 
 input:checked~form {
   display: block;
@@ -176,6 +176,10 @@ form .btn button {
 form .btn button:hover {
   background: #4360ad;
 }
+
+
+#modify-btn{
+  display: none;
 
 /*----------------------리뷰 조회 시작------------------------*/
 #testimonials {
@@ -268,4 +272,3 @@ form .btn button:hover {
     letter-spacing: 1px;
     transition: 0.5s ease;
     margin-right: 6px;
-}
