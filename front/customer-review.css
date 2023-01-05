@@ -92,6 +92,10 @@ p {
   display: none;
 }
 
+#block, #block2 {
+  display: block;
+}
+
 .star-widget label {
   font-size: 40px;
   color: rgb(180, 180, 180);
@@ -161,7 +165,7 @@ form .btn {
   margin: 15px 0;
 }
 
-form .btn button {
+form .btn button, #block, #block2 {
   height: 100%;
   width: 100%;
   border-radius: 2px;
