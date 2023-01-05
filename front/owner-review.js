@@ -15,7 +15,10 @@ function logout() {
 
 // 사장님 리뷰 조회
 function getReview() {
-  const userId = new URLSearchParams(window.location.search).get('userId');
+  let userId = new URLSearchParams(window.location.search).get('userId');
+  if (!userId) {
+    userId = 'none'
+  }
   axios
     .get(`api/reviews/owner/${userId}`, {
       headers: {
