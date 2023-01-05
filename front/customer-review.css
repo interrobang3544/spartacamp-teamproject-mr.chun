@@ -33,7 +33,7 @@ p{
 }
 .container {
   position: relative;
-  width: 400px;
+  width: 400px !important;
   background: #ffffff;
   padding: 20px 30px;
   border: 0x solid rgb(0, 132, 255);

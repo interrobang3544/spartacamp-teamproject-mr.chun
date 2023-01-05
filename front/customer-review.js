@@ -16,10 +16,16 @@ function logout() {
 
 
 // 리뷰 작성
+let rate = 0
+document.getElementById('star1').addEventListener("click", function() {rate = 1});
+document.getElementById('star2').addEventListener("click", function() {rate = 2});
+document.getElementById('star3').addEventListener("click", function() {rate = 3});
+document.getElementById('star4').addEventListener("click", function() {rate = 4});
+document.getElementById('star5').addEventListener("click", function() {rate = 5});
+
 function applyReview() {
   const title = document.getElementById('review-title').value;
   const content = document.getElementById('review-content').value;
-  const rate = 0;
   const serviceId = new URLSearchParams(window.location.search).get('serviceId');
 
   axios

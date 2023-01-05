@@ -36,12 +36,12 @@ function getReview() {
                 </div>
             </div>
   
-            <div class="reviews">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-regular fa-star"></i>
+            <div id="test" class="reviews">
+                <i id="review${i}-star1" class="fa-regular fa-star"></i>
+                <i id="review${i}-star2" class="fa-regular fa-star"></i>
+                <i id="review${i}-star3" class="fa-regular fa-star"></i>
+                <i id="review${i}-star4" class="fa-regular fa-star"></i>
+                <i id="review${i}-star5" class="fa-regular fa-star"></i>
             </div>
         </div>
   
@@ -49,6 +49,13 @@ function getReview() {
             <p>${data[i].content}</p>
         </div>`;
         document.getElementById('testimonial-box-container').append(temp);
+        
+        for (let j=0; j<data[i].rate; j++) {
+          console.log(i, j)
+          console.log(document.getElementById(`review${i}-star${j+1}`))
+          let star = document.getElementById(`review${i}-star${j+1}`)
+          star.classList.replace("fa-regular", "fa-solid")
+        }
       }
     })
     .catch((error) => {
