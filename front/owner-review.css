@@ -34,12 +34,6 @@ a{
     color: #fff;
     padding: 10px 20px;
 }
-.testimonial-heading span{
-    font-size: 1.3rem;
-    color: #252525;
-    margin-bottom: 10px;
-    letter-spacing: 2px;
-}
 .testimonial-box-container{
     display: flex;
     justify-content: center;
@@ -67,9 +61,6 @@ a{
     color: #3d3d3d;
     font-size: 1.1rem;
     letter-spacing: 0.5px;
-}
-.name-user span{
-    color: #f9d71c;
 }
 .box-top{
     display: flex;
