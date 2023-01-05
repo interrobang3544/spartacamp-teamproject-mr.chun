@@ -113,7 +113,7 @@
                 </div>
                 <div class="input-field button">
                   <input
-                    type="submit"
+                    type="button"
                     onclick="applyService()"
                     value="신청하기"
                   />
@@ -165,6 +165,41 @@
           </div>
         </div>
       </div>
+    <!-- 모달창2 -->
+    <div
+      class="modal fade"
+      id="alertModal2"
+      tabindex="-1"
+      data-bs-backdrop="static"
+      aria-labelledby="alertModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">알림</h5>
+            <button
+              type="button"
+              class="btn-close btn-confirm"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p id="modal-text2"></p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary btn-confirm"
+              data-bs-dismiss="modal"
+            >
+              확인
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     </section>
     <!-- bootstrap -->
     <script
@@ -174,6 +209,8 @@
     ></script>
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- ajax-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="./customer-place-order.js" type="text/javascript"></script>
   </body>

@@ -139,7 +139,6 @@ function updateReview() {
     });
 }
 
-
 // 리뷰 전체 조회
 function getReviewAll() {
   axios
@@ -147,7 +146,12 @@ function getReviewAll() {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token')}`,
       },
-    })
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    )
     .then((response) => {
       const { data } = response.data
       console.log(data)
@@ -188,7 +192,7 @@ function getReviewAll() {
       }
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
     });
 }
 
@@ -214,4 +218,3 @@ function getSelf(callback) {
       window.location.href = '/index.html';
     });
 }
-

@@ -13,7 +13,7 @@ class ReviewRepository {
     const review = await Review.findAll({
       raw: true,
       attributes: {
-        include: ["Service.customerId", "Service.customer.nickname"],
+        include: ['Service.customerId', 'Service.customer.nickname'],
       },
       include: [
         {

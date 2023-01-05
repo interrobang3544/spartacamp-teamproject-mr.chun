@@ -1,8 +1,44 @@
 // 페이지 로딩 완료 시
 $(document).ready(function () {
   getUser();
-  showService();
+  // showService();
 });
+
+// 로그인/로그아웃 버튼
+if (localStorage.getItem('token')) {
+  document.getElementsByClassName('login-btn')[0].style.display = 'none';
+} else {
+  document.getElementsByClassName('logout-btn')[0].style.display = 'none';
+  document.getElementsByClassName('logout-btn')[1].style.display = 'none';
+}
+
+// 로그아웃
+function logout() {
+  localStorage.clear();
+  window.location.href = '/';
+}
+
+// 사용자 정보 조회
+function getSelf(callback) {
+  axios
+    .get('api/users/me', {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
+    .then((response) => {
+      console.log(callback(response.data.user));
+    })
+    .catch((error) => {
+      if (status == 401) {
+        alert('로그인이 필요합니다.');
+      } else {
+        // localStorage.clear();
+        alert('알 수 없는 문제가 발생했습니다. 관리자에게 문의하세요.');
+      }
+      window.location.href = '/';
+    });
+}
 
 // GET - 회원 정보 조회 - 완료
 function getUser() {
@@ -14,19 +50,17 @@ function getUser() {
       authorization: `Bearer ${localStorage.getItem('token')}`,
     },
     success: function (response) {
-      console.log(response);
       const data = response.data;
-      console.log(data);
-      $('#user-nickname').text(data.nickname);
-      $('#user-phone-number').text(data.phoneNumber);
-      $('#user-address').text(data.address);
-      $('#user-point').text(data.point);
+      $('#user-nickname').val(data.nickname);
+      $('#user-phone-number').val(data.phoneNumber);
+      $('#user-address').val(data.address);
+      $('#user-point').val(data.point);
     },
     error: function (xhr, status, error) {
       if (status === 401) {
         customAlert('로그인이 필요합니다');
       } else {
-        localStorage.clear();
+        // localStorage.clear();
         customAlert(error.responseJSON.errorMessage);
       }
       window.location.href = '/';
@@ -36,8 +70,9 @@ function getUser() {
 }
 
 // PUT - 회원 정보 수정 - 인풋값 받아오기 진행중
-function modifyUser(status) {
-  const phoneNumber = $('#service-id').attr('data-service-id');
+function modifyUser() {
+  const phoneNumber = $('#user-phone-number').val();
+  const address = $('#user-address').val();
   $.ajax({
     type: 'PUT',
     url: `/api/users`,
@@ -62,23 +97,38 @@ function modifyUser(status) {
 }
 
 // DELETE - 회원 정보 삭제 - 확인 메세지 창 진행중
-function modifyUser(status) {
-  // 탈퇴 버튼 클릭시 '정말 탈퇴하시겠습니까?
-  // 정보가 지워지고 복구 불가능합니다.' 메세지 띄우기
-  $.ajax({
-    type: 'DELETE',
-    url: `/api/users`,
-    data: {},
-    headers: {
-      authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-    success: function (response) {
-      customAlert(response.message);
-    },
-    error: function (xhr) {
-      customAlert(xhr.responseJSON.errorMessage);
-    },
-  });
+function deleteUser() {
+  const check = confirm(
+    '정말 탈퇴하시겠습니까? 이용하신 서비스 정보가 모두 삭제되고 복구 불가능합니다.'
+  );
+  if (check) {
+    const confirmPassword = prompt('비밀번호를 입력해주세요');
+
+    getSelf(function (response) {
+      console.log('user data: ', response);
+      if (confirmPassword !== response.password) {
+        customAlert('비밀번호 확인에 실패하였습니다.');
+        // return "비번 확인 실패";
+      } else {
+        // 삭제 진행
+        $.ajax({
+          type: 'DELETE',
+          url: `/api/users`,
+          data: {},
+          headers: {
+            authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+          success: function (response) {
+            customAlert(response.message);
+            logout();
+          },
+          error: function (xhr) {
+            customAlert(xhr.responseJSON.errorMessage);
+          },
+        });
+      }
+    });
+  }
 }
 
 // GET - 서비스 하나 조회(사장님 마이페이지에서)
@@ -182,10 +232,7 @@ function modifyService(status) {
 }
 
 // 모달창
-const myModal = new bootstrap.Modal('#alertModal', {
-  keyboard: true,
-});
-
+const myModal = new bootstrap.Modal('#alertModal');
 function customAlert(text) {
   document.getElementById('modal-text').innerHTML = text;
   myModal.show();

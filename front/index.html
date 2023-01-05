@@ -31,7 +31,7 @@
             <li class="login-btn">
               <a href="loginsignup.html">로그인 / 회원가입</a>
             </li>
-            <li class="logout-btn"><a href="mypage.html">마이페이지</a></li>
+            <li class="logout-btn"><a id="mypage" href="mypage.html">마이페이지</a></li>
             <li class="logout-btn">
               <a href="#" onclick="customAlert('로그아웃 하시겠습니까?')"
                 >로그아웃</a
@@ -107,8 +107,10 @@
         getSelf(function (response) {
           if ( response.userType === 0 ) {
             window.location.replace('/customer-place-order.html');
+            document.getElementById('mypage').href = 'owner-page.html';
           } else if ( response.userType === 1 ) {
-            
+            // window.location.replace('/');
+            // document.getElementById('mypage').href = 'customer-mypage.html';
           }
         });
       }
