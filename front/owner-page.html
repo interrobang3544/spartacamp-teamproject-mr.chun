@@ -6,91 +6,126 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="header.css" />
     <link rel="stylesheet" href="owner-page.css" />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+        rel="stylesheet" />
 </head>
 
 <body>
-    <div class="container">
-       <header>주문 확인</header>
-       <div class="progress-bar">
-        <div class="step">
-            <p>
-               대기 중
-            </p>
-            <div class="bullet">
-               <span>1</span>
+    
+    <section class="header">
+        <nav>
+            <a href="index.html"><img src="images/logo.PNG" /></a>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="">홈</a></li>
+                    <li class="login-btn"><a href="loginsignup.html">로그인 / 회원가입</a></li>
+                    <li class="logout-btn"><a href="mypage.html">마이페이지</a></li>
+                    <li class="logout-btn">
+                        <a href="#" onclick="logout()">로그아웃</a>
+                    </li>
+                </ul>
             </div>
-         </div>
-          <div class="step">
-             <p>
-                수거 중
-             </p>
-             <div class="bullet">
-                <span>1</span>
-             </div>
-          </div>
-          <div class="step">
-             <p>
-                수거 완료
-             </p>
-             <div class="bullet">
-                <span>2</span>
-             </div>
-          </div>
-          <div class="step">
-             <p>
-                배송 중
-             </p>
-             <div class="bullet">
-                <span>3</span>
-             </div>
-          </div>
-          <div class="step">
-             <p>
-                배송 완료
-             </p>
-             <div class="bullet">
-                <span>4</span>
-             </div>
-          </div>
-       </div>
-       <div class="form-outer">
-          <form action="#">
-             <div class="page slide-page">
-                <div class="title">
-                   고객님의 주문
+        </nav>
+
+    <!-- 세탁물 관리 -->
+    <div class="container">
+        <header>주문 확인</header>
+
+        <!-- 상태 업데이트 바 입니다 -->
+        <div class="progress-bar">
+            <div class="step">
+                <p>
+                    대기 중
+                </p>
+                <div class="bullet">
+                    <span>1</span>
                 </div>
-                <div class="field">
-                   <div class="label">
-                      닉네임
-                   </div>
-                   <input type="text">
+            </div>
+            <div class="step">
+                <p>
+                    수거 중
+                </p>
+                <div class="bullet">
+                    <span>2</span>
                 </div>
-                <div class="field">
-                    <div class="label">
-                       전화번호
+            </div>
+            <div class="step">
+                <p>
+                    수거 완료
+                </p>
+                <div class="bullet">
+                    <span>3</span>
+                </div>
+            </div>
+            <div class="step">
+                <p>
+                    배송 중
+                </p>
+                <div class="bullet">
+                    <span>4</span>
+                </div>
+            </div>
+            <div class="step">
+                <p>
+                    배송 완료
+                </p>
+                <div class="bullet">
+                    <span>5</span>
+                </div>
+            </div>
+        </div>
+        <p id="jongki">사장님 업데이트 누르면 된다고</p>
+        <!------- 여기서부터는 고객님 정보 입니다----------
+
+        혹시 textarea가 필요하시다면 
+        <textarea cols="30"></textarea> 여깄습니다 -->
+
+        <div class="form-outer">
+            <form action="#">
+                <div class="page slide-page">
+                    <div class="title">
+                        고객님의 주문
                     </div>
-                    <input type="text">
-                 </div>
-                 <div class="field">
-                    <div class="label">
-                       주소
+                    <div class="field">
+                        <div class="label">
+                            닉네임
+                        </div>
+                        <input type="text">
                     </div>
-                    <input type="text">
-                 </div>
-                <div class="field">
-                   <div class="label">
-                      요청사항
-                   </div>
-                   <input type="text">
+                    <div class="field">
+                        <div class="label">
+                            전화번호
+                        </div>
+                        <input type="text">
+                    </div>
+                    <div class="field">
+                        <div class="label">
+                            주소
+                        </div>
+                        <input type="text">
+                    </div>
+                    <div class="field">
+                        <div class="label">
+                            요청사항
+                        </div>
+                        <input type="text">
+                    </div>
+
+                    <!-- 버튼 필요없으시쥬?
+                    <div class="field">
+                        <button class="firstNext next">Next</button>
+                    </div> -->
                 </div>
-                <div class="field">
-                   <button class="firstNext next">Next</button>
-                </div>
-             </div>
-          </form>
-       </div>
+            </form>
+        </div>
     </div>
- </body>
+</section>
+
+</div>
+</body>
+
 </html>
