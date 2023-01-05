@@ -6,7 +6,6 @@
     box-sizing: border-box;
     font-family: 'Noto Sans KR', sans-serif;
 }
-
 body{
     height: 100vh;
     display: flex;
@@ -33,7 +32,6 @@ body{
     width: 200%;
     transition: height 0.2s ease;
 }
-
 
 .container .form{
     width: 50%;
