@@ -17,7 +17,6 @@ body {
 }
 .kingcontainer{
     border: 1px solid #000;
-
 }
 .container {
     width: 330px;
@@ -34,6 +33,7 @@ body {
     font-size: 35px;
     font-weight: 600;
     margin: 0 0 30px 0;
+    color: #4070f4;
 }
 
 .container .form-outer {
@@ -51,12 +51,6 @@ body {
     transition: margin-left 0.3s ease-in-out;
 }
 
-.form-outer form .page .title {
-    text-align: left;
-    font-size: 25px;
-    font-weight: 500;
-}
-
 .form-outer form .page .field {
     width: 330px;
     height: 45px;
@@ -69,6 +63,8 @@ form .page .field .label {
     position: absolute;
     top: -30px;
     font-weight: 500;
+    
+    color: #4070f4;
 }
 
 form .page .field input {
@@ -175,6 +171,7 @@ form .page .field button:hover {
     font-size: 14px;
     position: absolute;
     top: 316px;
-    color:#4c73e0;
+    color:#aaaaaa;
     text-align: center;
+    right: 835px;
 }
