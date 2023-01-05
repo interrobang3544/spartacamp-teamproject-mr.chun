@@ -93,12 +93,12 @@ function sign_up() {
       userType: userType,
     })
     .then((response) => {
-      customAlert('회원가입을 축하드립니다!', function () {
+      customAlert2('회원가입을 축하드립니다!', function () {
         window.location.replace('/loginsignup.html');
       });
     })
     .catch((error) => {
-      customAlert(error.response.data.errorMessage);
+      customAlert2(error.response.data.errorMessage);
     });
 }
 
@@ -116,7 +116,7 @@ function sign_in() {
       window.location.replace('/');
     })
     .catch((error) => {
-      customAlert(error.response.data.errorMessage);
+      customAlert2(error.response.data.errorMessage);
     });
 }
 
