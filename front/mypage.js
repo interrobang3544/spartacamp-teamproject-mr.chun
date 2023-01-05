@@ -148,7 +148,11 @@ function customAlert(text) {
   document.getElementById('modal-text').innerHTML = text;
   myModal.show();
 }
-// function customAlert(text, confirmCallback) {
-//   $('#alertText').text(text);
-//   $('#alertModal').modal('show');
-// }
+
+// 모달창2 - 확인 버튼만 있는 것.
+const myModal2 = new bootstrap.Modal('#alertModal2');
+function customAlert2(text) {
+  document.getElementById('modal-text2').innerHTML = text;
+  myModal2.show();
+}
+

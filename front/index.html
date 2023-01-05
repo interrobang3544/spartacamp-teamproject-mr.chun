@@ -55,7 +55,7 @@
         <img src="images/smell.jpg" />
       </div>
 
-      <!-- 모달창 -->
+      <!-- 로그아웃 모달창 -->
       <div
         class="modal fade"
         id="alertModal"
@@ -96,6 +96,41 @@
           </div>
         </div>
       </div>
+      <!-- 모달창2 -->
+      <div
+      class="modal fade"
+      id="alertModal2"
+      tabindex="-1"
+      data-bs-backdrop="static"
+      aria-labelledby="alertModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">알림</h5>
+            <button
+              type="button"
+              class="btn-close btn-confirm"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p id="modal-text2"></p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary btn-confirm"
+              data-bs-dismiss="modal"
+            >
+              확인
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     </section>
     <!-- bootstrap -->
     <script
@@ -138,6 +173,13 @@
         if (confirmCallback) {
           $('#alertModal .btn-confirm').click(confirmCallback);
         }
+      }
+
+      // 모달창2 - 확인 버튼만 있는 것.
+      const myModal2 = new bootstrap.Modal('#alertModal2');
+      function customAlert2(text) {
+        document.getElementById('modal-text2').innerHTML = text;
+        myModal2.show();
       }
 
       // 사용자 정보 조회

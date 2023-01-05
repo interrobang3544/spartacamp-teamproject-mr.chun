@@ -138,13 +138,53 @@
                     </form>
                 </div>
             </div>
-
-
         </div>
-    <!-- 모달창 - 확인버튼만 있는 -->
-    <div
+
+      <!-- 로그아웃 모달창 -->
+      <div
+        class="modal fade"
+        id="alertModal"
+        tabindex="-1"
+        aria-labelledby="alertModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">알림</h5>
+              <button
+                type="button"
+                class="btn-close btn-confirm"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p id="modal-text"></p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                취소
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary btn-confirm"
+                onclick="logout()"
+              >
+                로그아웃
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 모달창2 -->
+      <div
       class="modal fade"
-      id="alertModal"
+      id="alertModal2"
       tabindex="-1"
       data-bs-backdrop="static"
       aria-labelledby="alertModalLabel"
@@ -162,7 +202,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <p id="modal-text"></p>
+            <p id="modal-text2"></p>
           </div>
           <div class="modal-footer">
             <button
