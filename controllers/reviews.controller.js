@@ -17,7 +17,10 @@ class ReviewsController {
   };
 
   getReviewByOwnerId = async (req, res, next) => {
-    const { userId } = req.params;
+    let { userId } = req.params;
+    if (userId = 'none') {
+      userId = res.locals.user.userId;
+    }
     const review = await this.reviewService.findReviewByOwnerId(userId);
     res.status(200).json({ data: review });
   };

@@ -9,17 +9,10 @@ if (localStorage.getItem('token')) {
     document.getElementById('inputNickname').value = response.nickname;
     document.getElementById('inputPhoneNumber').value = response.phoneNumber;
     document.getElementById('inputAddress').value = response.address;
+    document.getElementsByClassName('logout-btn')[3].style.display = 'none';
   });
 } else {
   window.location.replace('/index.html');
-}
-
-if (localStorage.getItem('token')) {
-  document.getElementsByClassName('login-btn')[0].style.display = 'none';
-} else {
-  document.getElementsByClassName('logout-btn')[0].style.display = 'none';
-  document.getElementsByClassName('logout-btn')[1].style.display = 'none';
-  document.getElementsByClassName('logout-btn')[2].style.display = 'none';
 }
 
 // 로그아웃

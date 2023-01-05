@@ -3,6 +3,7 @@ if (localStorage.getItem('token')) {
     if (response.userType !== 0) {
       window.location.replace('/index.html');
     }
+    document.getElementsByClassName('logout-btn')[3].style.display = 'none';
     getReview();
     getReviewAll();
   });
