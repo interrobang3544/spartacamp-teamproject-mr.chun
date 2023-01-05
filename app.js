@@ -6,6 +6,7 @@ const router = require('./routes');
 
 app.use(express.static('front'));
 app.use(express.json());
+app.use(express.urlencoded());
 app.use('/api', router);
 
 app.listen(port, () => {
