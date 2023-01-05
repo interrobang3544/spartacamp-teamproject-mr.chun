@@ -164,6 +164,7 @@ function doService(serviceId) {
     })
     .catch((error) => {
       console.log(error);
+      customAlert(error.response.data.errorMessage);
     });
 }
 
