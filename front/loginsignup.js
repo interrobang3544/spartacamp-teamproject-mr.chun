@@ -128,3 +128,10 @@ function customAlert(text, confirmCallback) {
     $('#alertModal .btn-confirm').click(confirmCallback);
   }
 }
+
+// 모달창2 - 확인 버튼만 있는 것.
+const myModal2 = new bootstrap.Modal('#alertModal2');
+function customAlert2(text) {
+  document.getElementById('modal-text2').innerHTML = text;
+  myModal2.show();
+}

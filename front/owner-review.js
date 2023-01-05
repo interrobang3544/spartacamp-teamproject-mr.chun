@@ -84,3 +84,17 @@ function getSelf(callback) {
       window.location.href = '/';
     });
 }
+
+// 모달창
+const myModal = new bootstrap.Modal('#alertModal');
+function customAlert(text) {
+  document.getElementById('modal-text').innerHTML = text;
+  myModal.show();
+}
+
+// 모달창2 - 확인 버튼만 있는 것.
+const myModal2 = new bootstrap.Modal('#alertModal2');
+function customAlert2(text) {
+  document.getElementById('modal-text2').innerHTML = text;
+  myModal2.show();
+}
