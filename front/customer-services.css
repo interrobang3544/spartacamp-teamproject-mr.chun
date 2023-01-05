@@ -64,14 +64,21 @@ body{
   min-height: 100vh;
   overflow: auto;
 }
-
+#container-list {
+  padding: 50px 200px;
+}
 .container{
-  width: 330px !important;
+  width: 370px !important;
   background: rgb(122, 178, 180);
   text-align: center;
   border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   margin: 20px 0;
-  padding: 50px 35px 10px 35px;
+
+}
+.container .box {
+  background: rgb(255, 255, 255);
+  padding: 20px;
 }
 .container header{
   font-size: 35px;
@@ -192,4 +199,29 @@ form .page .field button:hover{
 .progress-bar .step:last-child .bullet:before,
 .progress-bar .step:last-child .bullet:after{
   display: none;
+}
+
+.title-and-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-list {
+  display: flex;
+}
+.btn-list .btn {
+  width: 60px;
+  height: 30px;
+  padding: 1px;
+  margin: 5px 5px 0px 5px;
+  font-size: small;
+}
+
+.hide {
+  display: none !important;
+}
+
+.show {
+  display: block !important;
 }

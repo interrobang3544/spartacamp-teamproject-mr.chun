@@ -31,6 +31,7 @@ class ServicesService {
         status: service.status,
         createdAt: service.createdAt,
         updatedAt: service.updatedAt,
+        ownerId: service.owner ? service.owner.userId : '',
         ownerNickname: service.owner ? service.owner.nickname : '',
         ownerPhoneNumber: service.owner ? service.owner.phoneNumber : '',
         ownerAddress: service.owner ? service.owner.address : '',

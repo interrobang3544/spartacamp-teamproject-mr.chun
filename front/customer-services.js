@@ -1,20 +1,31 @@
 if (localStorage.getItem('token')) {
+  getSelf(function (response) {
+    if (response.userType !== 0) {
+      window.location.replace('/index.html');
+    }
+  });
   document.getElementsByClassName('login-btn')[0].style.display = 'none';
-} else {
-  document.getElementsByClassName('logout-btn')[0].style.display = 'none';
-  document.getElementsByClassName('logout-btn')[1].style.display = 'none';
 }
 
 // 로그아웃
 function logout() {
   localStorage.clear();
-  window.location.href = '/';
+  window.location.href = '/index.html';
+}
+
+// 모달창
+const myModal = new bootstrap.Modal('#alertModal');
+function customAlert(text, confirmCallback) {
+  document.getElementById('modal-text').innerHTML = text;
+  myModal.show();
+  if (confirmCallback) {
+    $('#alertModal .btn-confirm').click(confirmCallback);
+  }
 }
 
 getService()
 // 손님 서비스 조회
 function getService() {
-  const userId = new URLSearchParams(window.location.search).get('userId');
   axios
     .get(`api/services/customer`, {
       headers: {
@@ -28,7 +39,7 @@ function getService() {
         const temp = document.createElement('div');
         temp.setAttribute('class', 'container');
         temp.innerHTML = `
-        <div>
+        <div class="box">
           <header>주문 확인</header>
           <div class="progress-bar">
             <div class="step">
@@ -74,7 +85,13 @@ function getService() {
                   <div class="label">요청사항</div>
                   <input type="text" placeholder="${data[i].customerRequest}" readonly />
                 </div>
-                <div class="title">담당 사장님</div>
+                <div class="title-and-btn">
+                  <div class="title">담당 사장님</div>
+                  <div class="btn-list">
+                  <button type="button" onclick="location.href='owner-review.html?userId=${data[i].ownerId}'" class="btn btn-primary">리뷰 조회</button>
+                  <button type="button" id="review${i}" onclick="location.href='customer-review.html?serviceId=${data[i].serviceId}'" class="btn btn-primary hide">리뷰 쓰기</button>
+                  </div>
+                </div>
                 <div class="field">
                   <div class="label">닉네임</div>
                   <input type="text" placeholder="${data[i].ownerNickname}" readonly />
@@ -104,6 +121,7 @@ function getService() {
           status = 4
         } else if (status === "배송 완료") {
           status = 5
+          document.getElementById(`review${i}`).classList.replace("hide", "show")
         }
         for (j=0; j<status; j++) {
           document.getElementById(`span${i}-${j+1}`).innerHTML = "✓"
@@ -112,5 +130,27 @@ function getService() {
     })
     .catch((error) => {
       console.log(error)
+    });
+}
+
+// 사용자 정보 조회
+function getSelf(callback) {
+  axios
+    .get('api/users/me', {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    })
+    .then((response) => {
+      callback(response.data.user);
+    })
+    .catch((error) => {
+      if (status == 401) {
+        alert('로그인이 필요합니다.');
+      } else {
+        localStorage.clear();
+        alert('알 수 없는 문제가 발생했습니다. 관리자에게 문의하세요.');
+      }
+      window.location.href = '/';
     });
 }
