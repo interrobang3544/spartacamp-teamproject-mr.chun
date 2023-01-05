@@ -157,12 +157,24 @@ class UsersController {
       const userInfo = await this.userService.findUserByPk(userId);
       return res.status(200).json({ data: userInfo });
     } catch (error) {
-      console.log(error.message);
       return res.status(400).json({
         errorMessage: '회원 정보 조회에 실패하였습니다.',
       });
     }
   };
+
+  updatePoint = async (req, res, next) => {
+    try {
+      const { nickname } = res.locals.user;
+      const { point } = req.body;
+      await this.userService.updateUserPointByNickname(point, nickname);
+    } catch (error) {
+      return res.status(400).json({
+        errorMessage: '포인트 수정에 실패하였습니다.',
+      });
+    }
+    
+  }
 
   updateUser = async (req, res, next) => {
     const { userId } = res.locals.user;

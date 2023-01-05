@@ -10,6 +10,7 @@ router.post('/login', usersController.login);
 router.get('/me', authMiddleware, usersController.me);
 router.get('/', authMiddleware, usersController.getUser);
 router.put('/', authMiddleware, usersController.updateUser);
+router.put('/point', authMiddleware, usersController.updatePoint);
 router.delete('/', authMiddleware, usersController.deleteUser);
 
 module.exports = router;

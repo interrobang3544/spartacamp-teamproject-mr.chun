@@ -1,3 +1,14 @@
+if (localStorage.getItem('token')) {
+    window.location.replace('/index.html');
+}
+
+document.getElementsByClassName('login-btn')[0].style.display = 'none';
+document.getElementsByClassName('logout-btn')[0].style.display = 'none';
+document.getElementsByClassName('logout-btn')[1].style.display = 'none';
+document.getElementsByClassName('logout-btn')[2].style.display = 'none';
+document.getElementsByClassName('logout-btn')[3].style.display = 'none';
+document.getElementsByClassName('logout-btn')[4].style.display = 'none';
+
 const container = document.querySelector('.container'),
   pwShowHide = document.querySelectorAll('.showHidePw'),
   pwFields = document.querySelectorAll('.password'),
@@ -117,4 +128,11 @@ function customAlert(text, confirmCallback) {
   if (confirmCallback) {
     $('#alertModal .btn-confirm').click(confirmCallback);
   }
+}
+
+// 모달창2 - 확인 버튼만 있는 것.
+const myModal2 = new bootstrap.Modal('#alertModal2');
+function customAlert2(text) {
+  document.getElementById('modal-text2').innerHTML = text;
+  myModal2.show();
 }

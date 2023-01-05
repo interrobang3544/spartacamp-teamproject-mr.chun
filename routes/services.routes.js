@@ -9,7 +9,7 @@ const servicesController = new ServicesController();
 
 // 3. 라우터로 경로 지정
 router.get('/owner/mypage', authMiddleware, servicesController.getOwnerService);
-router.put('/:serviceId', authMiddleware, servicesController.pickupService);
+router.put('/pickup/:serviceId', authMiddleware, servicesController.pickupService);
 router.put(
   '/:serviceId/mypage',
   authMiddleware,
@@ -17,6 +17,7 @@ router.put(
 );
 router.post('/', authMiddleware, servicesController.request);
 router.get('/customer', authMiddleware, servicesController.customerInfo);
+router.get('/customer/pending', authMiddleware, servicesController.getPendingService);
 
 const { upload } = require('../middlewares/image-upload-middleware');
 router.post('/upload', upload.single('userfile'), async (req, res) => {

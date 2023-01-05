@@ -15,7 +15,10 @@ function logout() {
 
 // 사장님 리뷰 조회
 function getReview() {
-  const userId = new URLSearchParams(window.location.search).get('userId');
+  let userId = new URLSearchParams(window.location.search).get('userId');
+  if (!userId) {
+    userId = 'none'
+  }
   axios
     .get(`api/reviews/owner/${userId}`, {
       headers: {
@@ -83,4 +86,18 @@ function getSelf(callback) {
       }
       window.location.href = '/';
     });
+}
+
+// 모달창
+const myModal = new bootstrap.Modal('#alertModal');
+function customAlert(text) {
+  document.getElementById('modal-text').innerHTML = text;
+  myModal.show();
+}
+
+// 모달창2 - 확인 버튼만 있는 것.
+const myModal2 = new bootstrap.Modal('#alertModal2');
+function customAlert2(text) {
+  document.getElementById('modal-text2').innerHTML = text;
+  myModal2.show();
 }

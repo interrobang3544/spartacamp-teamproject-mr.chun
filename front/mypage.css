@@ -21,14 +21,13 @@ body {
 
 }
 .container {
-    width: 330px;
-    background: #ffffff;
-    text-align: center;
-    border-radius: 5px;
-    padding: 50px 35px 10px 35px;
-    margin: 0 auto;
-    box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
-
+    width: 330px !important;
+    background: #ffffff !important;
+    text-align: center !important;
+    border-radius: 5px !important;
+    padding: 50px 35px 10px 35px !important;
+    margin: 0 auto !important;
+    box-shadow: 2px 2px 30px rgba(0,0,0,0.1) !important;
 }
 
 .container header {

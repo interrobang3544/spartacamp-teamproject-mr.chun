@@ -1,13 +1,20 @@
 if (localStorage.getItem('token')) {
   document.getElementsByClassName('login-btn')[0].style.display = 'none';
+
   getSelf(function (response) {
-    if (response.userType !== 0) {
+    if (response.userType !== 1) {
       window.location.replace('/index.html');
     }
-    document.getElementsByClassName('logout-btn')[3].style.display = 'none';
+    if (response.userType === 1) {
+      document.getElementById('applyServicePage').href = 'owner-services.html';
+      document.getElementById('getServicePage').href = 'owner-page.html';
+    }
   });
 } else {
-  window.location.replace('/index.html');
+  document.getElementsByClassName('logout-btn')[0].style.display = 'none';
+  document.getElementsByClassName('logout-btn')[1].style.display = 'none';
+  document.getElementsByClassName('logout-btn')[2].style.display = 'none';
+  document.getElementsByClassName('logout-btn')[3].style.display = 'none';
 }
 
 // 로그아웃
@@ -37,13 +44,14 @@ getService();
 // 손님 서비스 조회
 function getService() {
   axios
-    .get(`api/services/customer`, {
+    .get(`api/services/customer/pending`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     })
     .then((response) => {
       const { data } = response.data;
+      console.log(data);
       for (let i = 0; i < data.length; i++) {
         const temp = document.createElement('div');
         temp.setAttribute('class', 'container');
@@ -85,7 +93,7 @@ function getService() {
           <div class="form-outer">
             <form action="#">
               <div class="page slide-page">
-                <div class="title">고객님의 주문</div>
+                <div class="title">${data[i].customerNickname} 고객님의 주문</div>
                 <div class="field">
                   <div class="label">서비스 신청 일시</div>
                   <input type="text" placeholder="날짜: ${data[i].createdAt
@@ -94,40 +102,26 @@ function getService() {
                     .join('  시간: ')}" readonly />
                 </div>
                 <div class="field">
-                  <div class="label">요청사항</div>
-                  <input type="text" placeholder="${
-                    data[i].customerRequest
-                  }" readonly />
-                </div>
-                <div class="title-and-btn">
-                  <div class="title">담당 사장님</div>
-                  <div class="btn-list">
-                  <button type="button" onclick="location.href='owner-review.html?userId=${
-                    data[i].ownerId
-                  }'" class="btn btn-primary">리뷰 조회</button>
-                  <button type="button" id="review${i}" onclick="location.href='customer-review.html?serviceId=${
-          data[i].serviceId
-        }'" class="btn btn-primary hide">리뷰 쓰기</button>
-                  </div>
-                </div>
-                <div class="field">
-                  <div class="label">닉네임</div>
-                  <input type="text" placeholder="${
-                    data[i].ownerNickname
-                  }" readonly />
-                </div>
-                <div class="field">
                   <div class="label">전화번호</div>
                   <input type="text" placeholder="${
-                    data[i].ownerPhoneNumber
+                    data[i].customerPhoneNumber
                   }" readonly />
                 </div>
                 <div class="field">
                   <div class="label">주소</div>
                   <input type="text" placeholder="${
-                    data[i].ownerAddress
+                    data[i].customerAddress
                   }" readonly />
                 </div>
+                <div class="field">
+                  <div class="label">요청사항</div>
+                  <input type="text" placeholder="${
+                    data[i].customerRequest
+                  }" readonly />
+                </div>
+                <button type="button" class="btn btn-primary" onclick="doService(${
+                  data[i].serviceId
+                })">서비스 진행하기</button>
               </div>
             </form>
           </div>
@@ -145,7 +139,6 @@ function getService() {
           status = 4;
         } else if (status === '배송 완료') {
           status = 5;
-          // '리뷰 쓰기' 버튼을 보이게 만듬.
           document
             .getElementById(`review${i}`)
             .classList.replace('hide', 'show');
@@ -157,6 +150,28 @@ function getService() {
     })
     .catch((error) => {
       console.log(error);
+    });
+}
+
+// 서비스 진행하기
+function doService(serviceId) {
+  console.log(serviceId);
+  axios
+    .put(
+      `api/services/pickup/${serviceId}`,
+      { serviceId },
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      }
+    )
+    .then((response) => {
+      window.location.replace('/owner-page.html');
+    })
+    .catch((error) => {
+      console.log(error);
+      customAlert(error.response.data.errorMessage);
     });
 }
 

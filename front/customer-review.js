@@ -3,6 +3,7 @@ if (localStorage.getItem('token')) {
     if (response.userType !== 0) {
       window.location.replace('/index.html');
     }
+    document.getElementsByClassName('logout-btn')[3].style.display = 'none';
     getReview();
     getReviewAll();
   });
@@ -23,6 +24,13 @@ function customAlert(text, confirmCallback) {
   if (confirmCallback) {
     $('#alertModal .btn-confirm').click(confirmCallback);
   }
+}
+
+// 모달창2 - 확인 버튼만 있는 것.
+const myModal2 = new bootstrap.Modal('#alertModal2');
+function customAlert2(text) {
+  document.getElementById('modal-text2').innerHTML = text;
+  myModal2.show();
 }
 
 const btn = document.querySelector('button');
@@ -75,11 +83,10 @@ function applyReview() {
       }
     )
     .then((response) => {
-      console.log(response);
-      // window.location.replace(`customer-review.html?serviceId=${serviceId}`);
+      window.location.replace(`customer-review.html?serviceId=${serviceId}`);
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
     });
 }
 
@@ -98,14 +105,13 @@ function getReview() {
       const { data } = response.data;
       document.getElementById('btn').style.display = 'none';
       document.getElementById('modify-btn').style.display = 'block';
-      document.getElementById('main-title').innerHTML =
-        '작성된 리뷰입니다';
+      document.getElementById('main-title').innerHTML = '작성된 리뷰입니다';
       document.getElementById('review-title').value = data.title;
       document.getElementById('review-content').value = data.content;
       document.getElementById(`star${data.rate}`).click();
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
       return;
     });
 }
@@ -146,17 +152,12 @@ function getReviewAll() {
       headers: {
         authorization: `Bearer ${localStorage.getItem('token')}`,
       },
-      {
-        headers: {
-          authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      }
-    )
+    })
     .then((response) => {
-      const { data } = response.data
-      console.log(data)
+      const { data } = response.data;
+      console.log(data);
 
-      for (let i=0; i<data.length; i++) {
+      for (let i = 0; i < data.length; i++) {
         const temp = document.createElement('div');
         temp.setAttribute('class', 'testimonial-box');
         temp.innerHTML = `
@@ -184,10 +185,10 @@ function getReviewAll() {
         <button class="firstNext next" onclick="location.href='customer-review.html?serviceId=${data[i].serviceId}'">수정</button>
         </div>`;
         document.getElementById('testimonial-box-container').append(temp);
-        
-        for (let j=0; j<data[i].rate; j++) {
-          let star = document.getElementById(`review${i}-star${j+1}`)
-          star.classList.replace("fa-regular", "fa-solid")
+
+        for (let j = 0; j < data[i].rate; j++) {
+          let star = document.getElementById(`review${i}-star${j + 1}`);
+          star.classList.replace('fa-regular', 'fa-solid');
         }
       }
     })
@@ -195,7 +196,6 @@ function getReviewAll() {
       console.log(error);
     });
 }
-
 
 // 사용자 정보 조회
 function getSelf(callback) {

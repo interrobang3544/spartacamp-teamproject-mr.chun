@@ -25,7 +25,7 @@ class ServicesController {
         userId
       );
       return res.status(200).json({
-        message: '세탁 서비스 신청이 등록되었습니다.',
+        message: '세탁 서비스 신청이 등록되었습니다. 10,000P가 차감됩니다.',
       });
     } catch (error) {
       console.log(error.message);
@@ -41,6 +41,28 @@ class ServicesController {
     try {
       const service = await this.servicesService.findServicesByCustomerId(
         userId
+      );
+      if (service.length == 0) {
+        return res.status(404).json({
+          errorMessage: '현재까지 신청하신 서비스가 하나도 없습니다.',
+        });
+      }
+      return res.status(200).json({
+        data: service,
+      });
+    } catch (error) {
+      console.log(error.message);
+      res.status(400).send({
+        errorMessage: '서비스 목록 조회에 실패하였습니다.',
+      });
+    }
+  };
+
+  // 대기 중인 신청목록 조회
+  getPendingService = async (req, res, next) => {
+    try {
+      const service = await this.servicesService.findServicesByStatus(
+        '대기 중'
       );
       if (service.length == 0) {
         return res.status(404).json({
@@ -91,7 +113,7 @@ class ServicesController {
   pickupService = async (req, res, next) => {
     const { serviceId } = req.params;
     const { userId, userType } = res.locals.user;
-
+    console.log(serviceId, userId, userType)
     // 유저 타입이 '사장님(1)'이 아닌 경우 (혹시 모르니)
     if (!userType) {
       return res.status(401).json({

@@ -24,6 +24,17 @@ class ServicesRepository {
     return services;
   };
 
+    // 대기중인 서비스 조회
+    findServicesByStatus = async (status) => {
+      const services = await Service.findAll({
+        include: ['owner', 'customer'],
+        where: { status },
+        order: [['serviceId', 'DESC']],
+      });
+      return services;
+    };
+    
+
   // '사장님이' '진행중인' 세탁 서비스 하나 조회
   findOngoingServiceByOwnerId = async (ownerId) => {
     const service = await Service.findOne({
