@@ -23,14 +23,6 @@ $(document).ready(function () {
   showService();
 });
 
-// if (localStorage.getItem('token')) {
-//   document.getElementsByClassName('login-btn')[0].style.display = 'none';
-// } else {
-//   document.getElementsByClassName('logout-btn')[0].style.display = 'none';
-//   document.getElementsByClassName('logout-btn')[1].style.display = 'none';
-//   document.getElementsByClassName('logout-btn')[2].style.display = 'none';
-// }
-
 // 로그아웃
 function logout() {
   localStorage.clear();

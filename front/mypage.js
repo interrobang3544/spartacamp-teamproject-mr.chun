@@ -1,19 +1,6 @@
 
 // 페이지 로딩 완료 시
 $(document).ready(function () {
-  // 사용자 타입(사장/고객)에 따라 보일 헤더 항목
-  if (localStorage.getItem('token')) {
-    getSelf(function (response) {
-      if ( response.userType === 0 ) {
-        // 손님 사용자라면
-        window.location.replace('/customer-place-order.html');
-        document.getElementById('service-view').href = 'customer-services.html';
-      } else {
-        // 사장님 사용자라면
-        document.getElementById('service-view').href = 'owner-page.html';
-      }
-    });
-  }
   getUser();
 });
 
