@@ -1,5 +1,6 @@
 const UserRepository = require('../repositories/users.repository');
 
+
 class UserService {
   userRepository = new UserRepository();
 
@@ -37,7 +38,9 @@ class UserService {
   };
 
   updateUserPointByNickname = async (point, nickname) => {
-    await this.userRepository.updateUserPointByNickname(point, nickname);
+    const findUser = await this.userRepository.findUserByNickname(nickname);
+
+    await this.userRepository.updateUserPointByNickname(findUser.point + point, nickname);
 
     const updateUser = await this.userRepository.findUserByNickname(nickname);
 

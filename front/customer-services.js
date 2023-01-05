@@ -1,10 +1,12 @@
 if (localStorage.getItem('token')) {
+  document.getElementsByClassName('login-btn')[0].style.display = 'none';
   getSelf(function (response) {
     if (response.userType !== 0) {
       window.location.replace('/index.html');
     }
   });
-  document.getElementsByClassName('login-btn')[0].style.display = 'none';
+} else {
+  window.location.replace('/index.html');
 }
 
 // 로그아웃

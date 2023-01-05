@@ -1,3 +1,13 @@
+if (localStorage.getItem('token')) {
+    window.location.replace('/index.html');
+}
+
+document.getElementsByClassName('login-btn')[0].style.display = 'none';
+document.getElementsByClassName('logout-btn')[0].style.display = 'none';
+document.getElementsByClassName('logout-btn')[1].style.display = 'none';
+document.getElementsByClassName('logout-btn')[2].style.display = 'none';
+document.getElementsByClassName('logout-btn')[3].style.display = 'none';
+
 const container = document.querySelector('.container'),
   pwShowHide = document.querySelectorAll('.showHidePw'),
   pwFields = document.querySelectorAll('.password'),

@@ -25,7 +25,7 @@ class ServicesController {
         userId
       );
       return res.status(200).json({
-        message: '세탁 서비스 신청이 등록되었습니다.',
+        message: '세탁 서비스 신청이 등록되었습니다. 10,000P가 차감됩니다.',
       });
     } catch (error) {
       console.log(error.message);
