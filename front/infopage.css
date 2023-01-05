@@ -5,6 +5,7 @@
     padding: 0;
     outline: none;
     font-family: 'Noto Sans KR', sans-serif;
+    box-sizing: border-box;
 }
 
 body {
@@ -53,7 +54,7 @@ body {
 
 .form-outer form .page .title {
     text-align: left;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 500;
 }
 
@@ -72,8 +73,8 @@ form .page .field .label {
 }
 
 form .page .field input {
-    height: 100%;
-    width: 100%;
+    height: 45px;
+    width: 250px;
     border: 1px solid lightgrey;
     border-radius: 5px;
     padding-left: 15px;
@@ -88,93 +89,27 @@ form .page .field select {
 }
 
 form .page .field button {
-    width: 100%;
+    width: 125px;
     height: calc(100% + 5px);
     border: none;
     background: #4070f4;
-    margin-top: -20px;
+    margin-top: -10px;
     border-radius: 5px;
     color: #fff;
     cursor: pointer;
     font-size: 18px;
     font-weight: 500;
     letter-spacing: 1px;
-    text-transform: uppercase;
     transition: 0.5s ease;
+    margin-right: 6px;
+    
 }
 
 form .page .field button:hover {
-    background: #000;
+    background: #223569;
 }
 
-.container .progress-bar {
-    display: flex;
-    margin: 40px 0;
-    user-select: none;
-}
-
-.container .progress-bar .step {
-    text-align: center;
-    width: 100%;
-    position: relative;
-}
-
-.container .progress-bar .step p {
-    font-weight: 500;
-    font-size: 14px;
-    /* 상태 글씨 색깔 여기서 바꾸시면 됩니다! */
-    color: #000;
-    margin-bottom: 8px;
-}
-
-.progress-bar .step .bullet {
-    height: 25px;
-    width: 25px;
-    /* 상태 동그라미 색깔 여기서 바꾸시면 됩니다! */
-    border: 2px solid rgba(0, 0, 0, 0.945);
-    display: inline-block;
-    border-radius: 50%;
-    position: relative;
-    transition: 0.2s;
-    font-weight: 500;
-    font-size: 17px;
-    line-height: 25px;
-}
-
-.progress-bar .step .bullet span {
-    position: absolute;
-    /* 상태 숫자 색깔 여기서 바꾸시면 됩니다! */
-    color: #000000;
-    font-size: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.progress-bar .step .bullet.active span {
-    display: none;
-}
-
-.progress-bar .step .bullet:before,
-.progress-bar .step .bullet:after {
-    position: absolute;
-    content: '';
-    bottom: 11px;
-    right: -37px;
-    height: 3.5px;
-    width: 32px;
-    background: #252525;
-}
-
-.progress-bar .step:last-child .bullet:before,
-.progress-bar .step:last-child .bullet:after {
-    display: none;
-}
-
-#jongki{
-    padding-bottom: 50px;
-    font-size: 14px;
-    position: absolute;
-    top: 316px;
-    color:#4c73e0;
-    text-align: center;
+p{
+    font-size: 12px;
+    color:rgb(147, 147, 147);
 }
