@@ -80,11 +80,12 @@ function modifyUser(phoneNumber, address) {
       authorization: `Bearer ${localStorage.getItem('token')}`,
     },
     success: function (response) {
-      customAlert(response.message);
+      console.log('modify response: ', response)
+      customAlert2(response.message);
     },
     error: function (xhr) {
-      // console.log(xhr.responseJSON.errorMessage);
-      customAlert(xhr.responseJSON.errorMessage);
+      console.log('modify failuser meessage: ', xhr.responseJSON.errorMessage);
+      customAlert2(xhr.responseJSON.errorMessage);
     },
   });
 }
@@ -101,10 +102,10 @@ function applyService() {
     if (phoneNumber !== response.phoneNumber || address !== response.address) {
       // 유저 정보 수정
       // alert('회원 정보를 업데이트 하여야 합니다.');
+      modifyUser(phoneNumber, address)
       customAlert2(
           '입력하신 정보로 회원 정보가 업데이트 되었습니다.'
         // '입력하신 정보로 회원 정보를 업데이트한 후 계속 진행하실 수 있습니다. 해당 주소와 전화 번호로 회원 정보를 업데이트 하시겠습니까?'
-        // modifyUser(phoneNumber, address)
       );
       // return;
     }
