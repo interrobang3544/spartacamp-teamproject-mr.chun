@@ -1,6 +1,3 @@
-
-
-
 if (localStorage.getItem('token')) {
   document.getElementsByClassName('login-btn')[0].style.display = 'none';
 } else {

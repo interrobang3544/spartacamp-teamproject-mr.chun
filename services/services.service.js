@@ -32,6 +32,8 @@ class ServicesService {
         createdAt: service.createdAt,
         updatedAt: service.updatedAt,
         ownerNickname: service.owner ? service.owner.nickname : '',
+        ownerPhoneNumber: service.owner ? service.owner.phoneNumber : '',
+        ownerAddress: service.owner ? service.owner.address : '',
       };
     });
   };

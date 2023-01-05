@@ -66,6 +66,7 @@ function applyService() {
   getSelf(function (response) {
     if (phoneNumber !== response.phoneNumber || address !== response.address) {
       // 유저 정보 수정
+      customAlert('정보 수정')
     }
   })
 
