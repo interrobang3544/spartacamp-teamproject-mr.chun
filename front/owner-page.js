@@ -71,17 +71,15 @@ function showService() {
       console.log(response);
       const data = response.data.data;
       let status = data.status;
-      $('#service-id').text(`${data.serviceId}번 세탁물`); // .text .attr
-      $('#service-id').attr('data-service-id', data.serviceId); // .text .attr
+
+      $('#service-id').text(`${data.serviceId}번 세탁물`);
+      $('#service-id').attr('data-service-id', data.serviceId);
       $('#customer-nickname').val(data.customerNickname);
       // $('#image').text(data.image);
       $('#customer-phone-number').val(data.customerPhoneNumber);
       $('#customer-address').val(data.customerAddress);
       $('#customer-request').val(data.customerRequest);
-      // $('#status').text(data.status);
-      // $('#created-at').text(data.createdAt);
-      // $('#updated-at').text(data.updatedAt);
-      // $('#owner-nickname').html(data.ownerNickname);
+
       if (status === '대기 중') {
         status = 1;
         // '2'클릭 가능
@@ -95,6 +93,7 @@ function showService() {
       } else if (status === '배송 중') {
         status = 4;
         $('#bullet5').attr('onclick', `modifyService('배송 완료')`);
+        updatePoint()
       } else if (status === '배송 완료') {
         status = 5;
       }
@@ -112,6 +111,27 @@ function showService() {
         customAlert(error.response.data.errorMessage);
       }
     });
+}
+
+// PUT - 포인트 업데이트(사장님 +10000)
+function updatePoint() {
+  $.ajax({
+    type: 'PUT',
+    url: '/api/users/point',
+    data: JSON.stringify({ point: 10000 }),
+    contentType: 'application/json; charset=UTF-8',
+    headers: {
+      authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+    success: function (response) {
+      // await customAlert('10,000 포인트를 획득하였습니다.');
+      alert('10,000 포인트를 획득하였습니다.') // 모달창도, alert창도 뜨질 않음. 10000포인트는 잘 들어감을 확인.
+      // location.reload();
+    },
+    error: function (xhr) {
+      customAlert(xhr.responseJSON.errorMessage);
+    },
+  })
 }
 
 // PUT - 서비스 수정(사장님 마이페이지에서)
