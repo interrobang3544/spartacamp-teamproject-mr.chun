@@ -40,6 +40,43 @@ class ReviewService {
     });
   };
 
+  findReviewByServiceId = async (userId, serviceId) => {
+    const findReview = await this.reviewRepository.findReviewByServiceId(
+      userId,
+      serviceId
+    );
+
+    return {
+      reviewId: findReview.reviewId,
+      title: findReview.title,
+      content: findReview.content,
+      rate: findReview.rate,
+      serviceId: findReview.serviceId,
+      createdAt: findReview.createdAt,
+      updatedAt: findReview.updatedAt,
+    };
+  };
+
+  findReviewByCustomerId = async (userId) => {
+    const findReview = await this.reviewRepository.findReviewByCustomerId(
+      userId
+    );
+
+    return findReview.map((review) => {
+      return {
+        reviewId: review.reviewId,
+        title: review.title,
+        content: review.content,
+        rate: review.rate,
+        serviceId: review.serviceId,
+        customerId: review.customerId,
+        nickname: review.nickname,
+        createdAt: review.createdAt,
+        updatedAt: review.updatedAt,
+      };
+    });
+  };
+
   createReview = async (title, content, rate, serviceId) => {
     const createReviewData = await this.reviewRepository.createReview(
       title,
@@ -59,13 +96,23 @@ class ReviewService {
     };
   };
 
-  updateReview = async (reviewId, title, content, rate) => {
-    const findReview = await this.reviewRepository.findReviewById(reviewId);
-    if (!findReview) throw new Error("Review doesn't exist");
+  updateReview = async (userId, title, content, rate, serviceId) => {
+    const findReview = await this.reviewRepository.findReviewByServiceId(
+      userId,
+      serviceId
+    );
 
-    await this.reviewRepository.updateReview(reviewId, title, content, rate);
+    await this.reviewRepository.updateReview(
+      findReview.reviewId,
+      title,
+      content,
+      rate
+    );
 
-    const updateReview = await this.reviewRepository.findReviewById(reviewId);
+    const updateReview = await this.reviewRepository.findReviewByServiceId(
+      userId,
+      serviceId
+    );
 
     return {
       reviewId: updateReview.reviewId,
