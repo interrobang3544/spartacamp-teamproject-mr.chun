@@ -34,7 +34,6 @@ function getService() {
     })
     .then((response) => {
       const { data } = response.data
-      console.log(data)
       for (let i=0; i<data.length; i++) {
         const temp = document.createElement('div');
         temp.setAttribute('class', 'container');
