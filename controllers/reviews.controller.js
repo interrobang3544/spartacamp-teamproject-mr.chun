@@ -16,20 +16,19 @@ class ReviewsController {
     }
   };
 
-  getReviewById = async (req, res, next) => {
-    const { reviewId } = req.params;
-    const review = await this.reviewService.findReviewById(reviewId);
-
+  getReviewByOwnerId = async (req, res, next) => {
+    const { userId } = req.params;
+    const review = await this.reviewService.findReviewByOwnerId(userId);
     res.status(200).json({ data: review });
   };
 
   createReview = async (req, res, next) => {
-    const { nickname, password, title, content } = req.body;
+    const { title, content, rate, serviceId } = req.body;
     const createReviewData = await this.reviewService.createReview(
-      nickname,
-      password,
       title,
-      content
+      content,
+      rate,
+      serviceId
     );
 
     res.status(201).json({ data: createReviewData });
