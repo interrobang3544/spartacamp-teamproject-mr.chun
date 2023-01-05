@@ -20,11 +20,19 @@ $(document).ready(function () {
 // 로그인/로그아웃 버튼
 if (localStorage.getItem('token')) {
   document.getElementsByClassName('login-btn')[0].style.display = 'none';
+  getSelf(function (response) {
+    if (response.userType === 1) {
+      document.getElementById('applyServicePage').href = 'owner-services.html';
+      document.getElementById('getServicePage').href = 'owner-page.html';
+    }
+  });
 } else {
   document.getElementsByClassName('logout-btn')[0].style.display = 'none';
   document.getElementsByClassName('logout-btn')[1].style.display = 'none';
   document.getElementsByClassName('logout-btn')[2].style.display = 'none';
+  document.getElementsByClassName('logout-btn')[3].style.display = 'none';
 }
+
 
 // 로그아웃
 function logout() {

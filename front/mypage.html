@@ -12,14 +12,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
         rel="stylesheet" />
-<!--    &lt;!&ndash; bootstrap CSS &ndash;&gt;-->
-<!--    <link-->
-<!--      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"-->
-<!--      rel="stylesheet"-->
-<!--      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"-->
-<!--      crossorigin="anonymous"-->
-<!--    />-->
     <!-- bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      rel="stylesheet"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    />
+     bootstrap CSS
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -31,20 +31,41 @@
 <body>
     
     <section class="header">
-        <nav>
-            <a href="index.html"><img src="images/logo.PNG" /></a>
-            <div class="nav-links">
-                <ul>
-                    <li><a href="/">홈</a></li>
-                    <li class="login-btn"><a href="loginsignup.html">로그인 / 회원가입</a></li>
-                    <li class="logout-btn"><a id="service-view" href="customer-services.html">서비스 현황</a></li>
-                    <li class="logout-btn"><a href="mypage.html">마이페이지</a></li>
-                    <li class="logout-btn">
-                        <a href="#" onclick="logout()">로그아웃</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+<!--<<<<<<< HEAD-->
+<!--        <nav>-->
+<!--            <a href="index.html"><img src="images/logo.PNG" /></a>-->
+<!--            <div class="nav-links">-->
+<!--                <ul>-->
+<!--                    <li><a href="/">홈</a></li>-->
+<!--                    <li class="login-btn"><a href="loginsignup.html">로그인 / 회원가입</a></li>-->
+<!--                    <li class="logout-btn"><a id="service-view" href="customer-services.html">서비스 현황</a></li>-->
+<!--                    <li class="logout-btn"><a href="mypage.html">마이페이지</a></li>-->
+<!--                    <li class="logout-btn">-->
+<!--                        <a href="#" onclick="logout()">로그아웃</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </nav>-->
+<!--=======-->
+      <nav>
+        <a href="index.html"><img src="images/logo.PNG" /></a>
+        <div class="nav-links">
+          <ul>
+            <li><a href="/index.html">홈</a></li>
+            <li class="login-btn">
+              <a href="loginsignup.html">로그인 / 회원가입</a>
+            </li>
+            <li class="logout-btn"><a id="applyServicePage" href="customer-place-order.html">서비스 신청</a></li>
+            <li class="logout-btn"><a id="getServicePage" href="customer-services.html">서비스 현황</a></li>
+            <li class="logout-btn"><a id="myPage" href="mypage.html">마이페이지</a></li>
+            <li class="logout-btn">
+              <a href="#" onclick="customAlert('로그아웃 하시겠습니까?')"
+                >로그아웃</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
 
         <div class="kingcontainer">
             <div class="container">

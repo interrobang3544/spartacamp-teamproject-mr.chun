@@ -1,14 +1,17 @@
+// const { default: axios } = require('axios');
+
 if (localStorage.getItem('token')) {
+  document.getElementsByClassName('login-btn')[0].style.display = 'none';
   getSelf(function (response) {
     if (response.userType !== 0) {
-      window.location.replace('/');
+      window.location.replace('/index.html');
     }
     document.getElementById('inputNickname').value = response.nickname;
     document.getElementById('inputPhoneNumber').value = response.phoneNumber;
     document.getElementById('inputAddress').value = response.address;
   });
 } else {
-  window.location.replace('/');
+  window.location.replace('/index.html');
 }
 
 if (localStorage.getItem('token')) {
@@ -129,7 +132,23 @@ function applyService() {
         .catch((error) => {
           customAlert2(error.response.data.errorMessage);
         });
-      // customAlert('정보 수정')
+
+      axios
+        .put(
+          'api/users/point',
+          { point: -10000 },
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+          }
+        )
+        .then((response) => {
+          customAlert2(response.data.message);
+        })
+        .catch((error) => {
+          customAlert2(error.response.data.errorMessage);
+        });
     }
   });
 }
