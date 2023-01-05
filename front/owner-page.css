@@ -15,8 +15,14 @@ body {
     overflow: hidden;
     overflow-y: scroll;
 }
-.kingcontainer{
-    border: 1px solid #000;
+.kingcontainer {
+    border: 1px solid rgb(197, 197, 197);
+    padding-bottom: 100px;
+    padding-top: 100px;
+}
+.bosscontainer {
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
 .container {
     width: 330px;
@@ -169,7 +175,7 @@ form .page .field button:hover {
     padding-bottom: 50px;
     font-size: 14px;
     position: absolute;
-    top: 316px;
+    top: 330px;
     color:#aaaaaa;
     text-align: center;
 }
