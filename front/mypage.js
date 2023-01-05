@@ -62,7 +62,7 @@ function modifyUser(status) {
 }
 
 // DELETE - 회원 정보 삭제 - 확인 메세지 창 진행중
-function modifyUser(status) {
+function deleteUser(status) {
   // 탈퇴 버튼 클릭시 '정말 탈퇴하시겠습니까?
   // 정보가 지워지고 복구 불가능합니다.' 메세지 띄우기
   $.ajax({
