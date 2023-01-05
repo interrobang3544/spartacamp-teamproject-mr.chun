@@ -1,8 +1,10 @@
-// 페이지 로딩 완료 시 - 마이페이지용
+
+// 페이지 로딩 완료 시
 $(document).ready(function () {
   getUser();
 });
 
+// 로그인/로그아웃 버튼
 if (localStorage.getItem('token')) {
   document.getElementsByClassName('login-btn')[0].style.display = 'none';
   getSelf(function (response) {
@@ -142,6 +144,7 @@ function deleteUser() {
 // 모달창
 const myModal = new bootstrap.Modal('#alertModal');
 function customAlert(text) {
+  // const myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
   document.getElementById('modal-text').innerHTML = text;
   myModal.show();
 }

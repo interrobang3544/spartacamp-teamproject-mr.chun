@@ -1,3 +1,4 @@
+
 if (localStorage.getItem('token')) {
   document.getElementsByClassName('login-btn')[0].style.display = 'none';
 
@@ -111,47 +112,6 @@ function showService() {
         customAlert(error.response.data.errorMessage);
       }
     });
-  // $.ajax({
-  //     type: 'GET',
-  //     url: '/api/services/owner/mypage',
-  //     data: {},
-  //     headers: {
-  //         authorization: `Bearer ${localStorage.getItem('token')}`,
-  //     },
-  //     success: function(response) {
-  //         console.log(response);
-  //         const data = response.data;
-  //         // $('.changed').text(data.serviceId); => .text = ...
-  //         // $('.changed').html('<p>New text</p>'); => .innerHTML = ...과 같음
-  //         //
-  //         $('#service-id').text(data.serviceId); // .text .attr
-  //         $('#customer-nickname').text(data.customerNickname);
-  //         $('#image').text(data.image);
-  //         $('#customer-request').html(data.customerRequest);
-  //         $('#customer-address').text(data.customerAddress);
-  //         $('#customer-phone-number').text(data.customerPhoneNumber);
-  //         $('#status').text(data.status);
-  //         $('#created-at').text(data.createdAt);
-  //         $('#updated-at').text(data.updatedAt);
-  //         $('#owner-nickname').html(data.ownerNickname);
-  //         // $('#inputNickname').attr('placeholder', `${data.ownerNickname}`)
-  //     },
-  //     error: function(xhr, status, error) {
-  //         console.log("status: ", status)
-  //         if (status === 401) {
-  //             customAlert('로그인이 필요합니다');
-  //         } else if (status === 404) {
-  //             // 내가 보내는 status는 'error'라고만 오기 때문에 문제가 있음.
-  //             $('.message').text('현재 진행중인 세탁 서비스가 없습니다.')
-  //             // $('.service-detail').css('display', 'none');
-  //         } else {
-  //             customAlert(error.responseJSON.errorMessage);
-  //             // customAlert(error.response.data.errorMessage);
-  //         }
-  //         window.location.href = '/';
-  //         // window.location.replace('/'); // 둘이 다른 점??
-  //     }
-  // })
 }
 
 // PUT - 서비스 수정(사장님 마이페이지에서)
