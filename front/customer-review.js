@@ -75,8 +75,7 @@ function applyReview() {
       }
     )
     .then((response) => {
-      console.log(response);
-      // window.location.replace(`customer-review.html?serviceId=${serviceId}`);
+      window.location.replace(`customer-review.html?serviceId=${serviceId}`);
     })
     .catch((error) => {
       console.log(error);
