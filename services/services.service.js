@@ -39,6 +39,28 @@ class ServicesService {
     });
   };
 
+  findServicesByStatus = async (status) => {
+    const services =
+      await this.servicesRepository.findServicesByStatus(status);
+    return services.map((service) => {
+      return {
+        serviceId: service.serviceId,
+        customerNickname: service.customer.nickname,
+        image: service.image,
+        customerRequest: service.customerRequest,
+        customerAddress: service.customer.address,
+        customerPhoneNumber: service.customer.phoneNumber,
+        status: service.status,
+        createdAt: service.createdAt,
+        updatedAt: service.updatedAt,
+        ownerId: service.owner ? service.owner.userId : '',
+        ownerNickname: service.owner ? service.owner.nickname : '',
+        ownerPhoneNumber: service.owner ? service.owner.phoneNumber : '',
+        ownerAddress: service.owner ? service.owner.address : '',
+      };
+    });
+  };
+
   // 3.
   findOngoingServiceByOwnerId = async (ownerId) => {
     const serviceDetail =
