@@ -95,12 +95,12 @@ function applyService() {
   const address = document.getElementById('inputAddress').value;
   const imageSrc = document.getElementById('image').src;
   const image = imageSrc || ' ';
+  // const image = `./uploadImages/${imageSrc.name}`;
   const customerRequest = document.getElementById('inputCustomerRequest').value;
 
   getSelf(function (response) {
     if (phoneNumber !== response.phoneNumber || address !== response.address) {
       // 유저 정보 수정
-      // alert('회원 정보를 업데이트 하여야 합니다.');
       modifyUser(phoneNumber, address)
       // customAlert2( // 이게 왜 안뜨지..
       //     '입력하신 정보로 회원 정보가 업데이트 되었습니다.'
@@ -127,6 +127,7 @@ function applyService() {
         .catch((error) => {
           customAlert2(error.response.data.errorMessage);
         });
+      // customAlert('정보 수정')
     }
   });
 }
@@ -135,7 +136,7 @@ let imageSrc = '';
 
 function loadFile(input) {
   console.log('input:', input.files[0]);
-
+  // imageSrc = input.files[0];
   let file = input.files[0];
 
   let newImage = document.getElementById('image');
