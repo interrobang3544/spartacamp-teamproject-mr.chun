@@ -135,6 +135,7 @@ function getService() {
           status = 4;
         } else if (status === '배송 완료') {
           status = 5;
+          // '리뷰 쓰기' 버튼을 보이게 만듬.
           document
             .getElementById(`review${i}`)
             .classList.replace('hide', 'show');

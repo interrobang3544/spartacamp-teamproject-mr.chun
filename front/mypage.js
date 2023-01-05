@@ -1,8 +1,22 @@
-// 페이지 로딩 완료 시
+// 페이지 로딩 완료 시 - 마이페이지용
 $(document).ready(function () {
   getUser();
-  // showService();
 });
+
+// // 사용자 타입(사장/고객)에 따라 보일 헤더 항목
+// if (localStorage.getItem('token')) {
+//   getUser();
+//   getSelf(function (response) {
+//     if ( response.userType === 0 ) {
+//       // 손님 사용자라면
+//       window.location.replace('/customer-place-order.html');
+//       document.getElementById('service-view').href = 'customer-services.html';
+//     } else if ( response.userType === 1 ) {
+//       // 사장님 사용자라면
+//       document.getElementById('service-view').href = 'owner-page.html';
+//     }
+//   });
+// }
 
 // 로그인/로그아웃 버튼
 if (localStorage.getItem('token')) {
@@ -34,6 +48,7 @@ function getSelf(callback) {
         alert('로그인이 필요합니다.');
       } else {
         // localStorage.clear();
+        console.log(error);
         alert('알 수 없는 문제가 발생했습니다. 관리자에게 문의하세요.');
       }
       window.location.href = '/';
@@ -129,106 +144,6 @@ function deleteUser() {
       }
     });
   }
-}
-
-// GET - 서비스 하나 조회(사장님 마이페이지에서)
-function showService() {
-  // const serviceId = 1 // '현재 서비스 중'인 서비스를 어떻게 얻어올 수 있을까?
-  axios
-    .get('api/services/owner/mypage', {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    })
-    .then((response) => {
-      console.log(response);
-      const data = response.data.data;
-      // $('.changed').text(data.serviceId); => .text = ...
-      // $('.changed').html('<p>New text</p>'); => .innerHTML = ...과 같음
-      //
-      $('#service-id').text(`${data.serviceId}번 세탁물`); // .text .attr
-      $('#service-id').attr('data-service-id', data.serviceId); // .text .attr
-      $('#customer-nickname').text(data.customerNickname);
-      $('#image').text(data.image);
-      $('#customer-request').html(data.customerRequest);
-      $('#customer-address').text(data.customerAddress);
-      $('#customer-phone-number').text(data.customerPhoneNumber);
-      $('#status').text(data.status);
-      $('#created-at').text(data.createdAt);
-      $('#updated-at').text(data.updatedAt);
-      $('#owner-nickname').html(data.ownerNickname);
-    })
-    .catch((error) => {
-      console.log(error);
-      if (error.response.status === 404) {
-        // $('.message').text('현재 진행중인 세탁 서비스가 없습니다.');
-        $('.message').text(error.response.data.errorMessage);
-      } else {
-        customAlert(error.response.data.errorMessage);
-      }
-    });
-  // $.ajax({
-  //     type: 'GET',
-  //     url: '/api/services/owner/mypage',
-  //     data: {},
-  //     headers: {
-  //         authorization: `Bearer ${localStorage.getItem('token')}`,
-  //     },
-  //     success: function(response) {
-  //         console.log(response);
-  //         const data = response.data;
-  //         // $('.changed').text(data.serviceId); => .text = ...
-  //         // $('.changed').html('<p>New text</p>'); => .innerHTML = ...과 같음
-  //         //
-  //         $('#service-id').text(data.serviceId); // .text .attr
-  //         $('#customer-nickname').text(data.customerNickname);
-  //         $('#image').text(data.image);
-  //         $('#customer-request').html(data.customerRequest);
-  //         $('#customer-address').text(data.customerAddress);
-  //         $('#customer-phone-number').text(data.customerPhoneNumber);
-  //         $('#status').text(data.status);
-  //         $('#created-at').text(data.createdAt);
-  //         $('#updated-at').text(data.updatedAt);
-  //         $('#owner-nickname').html(data.ownerNickname);
-  //         // $('#inputNickname').attr('placeholder', `${data.ownerNickname}`)
-  //     },
-  //     error: function(xhr, status, error) {
-  //         console.log("status: ", status)
-  //         if (status === 401) {
-  //             customAlert('로그인이 필요합니다');
-  //         } else if (status === 404) {
-  //             // 내가 보내는 status는 'error'라고만 오기 때문에 문제가 있음.
-  //             $('.message').text('현재 진행중인 세탁 서비스가 없습니다.')
-  //             // $('.service-detail').css('display', 'none');
-  //         } else {
-  //             customAlert(error.responseJSON.errorMessage);
-  //             // customAlert(error.response.data.errorMessage);
-  //         }
-  //         window.location.href = '/';
-  //         // window.location.replace('/'); // 둘이 다른 점??
-  //     }
-  // })
-}
-
-// PUT - 서비스 수정(사장님 마이페이지에서)
-function modifyService(status) {
-  const serviceId = $('#service-id').attr('data-service-id');
-  $.ajax({
-    type: 'PUT',
-    url: `/api/services/${serviceId}/mypage`,
-    data: JSON.stringify({ status: status }),
-    contentType: 'application/json; charset=UTF-8',
-    headers: {
-      authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-    success: function (response) {
-      customAlert(response.message);
-    },
-    error: function (xhr) {
-      // console.log(xhr.responseJSON.errorMessage);
-      customAlert(xhr.responseJSON.errorMessage);
-    },
-  });
 }
 
 // 모달창
