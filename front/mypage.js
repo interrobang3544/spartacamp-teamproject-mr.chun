@@ -68,10 +68,10 @@ function getUser() {
     },
     error: function (xhr, status, error) {
       if (status === 401) {
-        customAlert('로그인이 필요합니다');
+        customAlert2('로그인이 필요합니다');
       } else {
         // localStorage.clear();
-        customAlert(error.responseJSON.errorMessage);
+        customAlert2(error.responseJSON.errorMessage);
       }
       window.location.href = '/';
       // window.location.replace('/'); // 둘이 다른 점??
@@ -97,11 +97,11 @@ function modifyUser() {
       authorization: `Bearer ${localStorage.getItem('token')}`,
     },
     success: function (response) {
-      customAlert(response.message);
+      customAlert2(response.message);
     },
     error: function (xhr) {
       // console.log(xhr.responseJSON.errorMessage);
-      customAlert(xhr.responseJSON.errorMessage);
+      customAlert2(xhr.responseJSON.errorMessage);
     },
   });
 }
@@ -117,7 +117,7 @@ function deleteUser() {
     getSelf(function (response) {
       console.log('user data: ', response);
       if (confirmPassword !== response.password) {
-        customAlert('비밀번호 확인에 실패하였습니다.');
+        customAlert2('비밀번호 확인에 실패하였습니다.');
         // return "비번 확인 실패";
       } else {
         // 삭제 진행
@@ -129,11 +129,11 @@ function deleteUser() {
             authorization: `Bearer ${localStorage.getItem('token')}`,
           },
           success: function (response) {
-            customAlert(response.message);
+            customAlert2(response.message);
             logout();
           },
           error: function (xhr) {
-            customAlert(xhr.responseJSON.errorMessage);
+            customAlert2(xhr.responseJSON.errorMessage);
           },
         });
       }
