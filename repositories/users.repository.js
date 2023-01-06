@@ -1,8 +1,11 @@
-const { User } = require('../models');
 
 class UserRepository {
+  constructor(UserModel) {
+    this.userModel = UserModel;
+  }
+
   findUserByNickname = async (nickname) => {
-    const user = await User.findOne({ raw: true, where: { nickname } });
+    const user = await this.userModel.findOne({ raw: true, where: { nickname } });
     if (user === null) {
       return {};
     }
@@ -10,7 +13,7 @@ class UserRepository {
   };
 
   createUser = async (nickname, password, phoneNumber, address, userType) => {
-    const createUserData = await User.create({
+    const createUserData = await this.userModel.create({
       nickname,
       password,
       phoneNumber,
@@ -22,7 +25,7 @@ class UserRepository {
   };
 
   updateUserPointByNickname = async (point, nickname) => {
-    const updateUserPoint = await User.update(
+    const updateUserPoint = await this.userModel.update(
       { point },
       { where: { nickname } }
     );
@@ -32,12 +35,12 @@ class UserRepository {
   };
 
   findUserByPk = async (userId) => {
-    const user = await User.findByPk(userId);
+    const user = await this.userModel.findByPk(userId);
     return user;
   };
 
   updateUserInfoByPk = async (userId, phoneNumber, address) => {
-    const updatedUserData = await User.update(
+    const updatedUserData = await this.userModel.update(
       { phoneNumber, address },
       { where: { userId } }
       // { where: { userId, password } }
@@ -46,7 +49,7 @@ class UserRepository {
   };
 
   deleteUserByPk = async (userId) => {
-    const deletedUserData = await User.destroy({
+    const deletedUserData = await this.userModel.destroy({
       where: { userId },
       // where: { userId, password }
     });
