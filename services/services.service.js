@@ -4,7 +4,7 @@ const { Service } = require('../models');
 
 // 2. ServicesService 클래스 작성하기
 class ServicesService {
-  servicesRepository = new ServicesRepository();
+  servicesRepository = new ServicesRepository(Service);
 
   // 1.
   createService = async (image, customerRequest, customerId) => {

@@ -226,5 +226,4 @@ class ServicesController {
 }
 
 // 3. ServicesController 클래스 내보내기
-//  => 이것은 posts.routes.js에서 (제0계층) 라우터가 사용하게 된다.
 module.exports = ServicesController;
