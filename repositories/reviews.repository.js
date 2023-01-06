@@ -1,28 +1,31 @@
-const { Review } = require('../models');
-const { Service } = require('../models');
-const { User } = require('../models');
 
 class ReviewRepository {
+  constructor(ReviewModel, ServiceModel, UserModel) {
+    this.reviewModel = ReviewModel;
+    this.serviceModel = ServiceModel;
+    this.userModel = UserModel;
+  }
+
   findAllReview = async () => {
-    const reviews = await Review.findAll();
+    const reviews = await this.reviewModel.findAll();
 
     return reviews;
   };
 
   findReviewByOwnerId = async (ownerId) => {
-    const review = await Review.findAll({
+    const review = await this.reviewModel.findAll({
       raw: true,
       attributes: {
         include: ['Service.customerId', 'Service.customer.nickname'],
       },
       include: [
         {
-          model: Service,
+          model: this.serviceModel,
           attributes: [],
           where: { ownerId },
           include: [
             {
-              model: User,
+              model: this.userModel,
               as: 'customer',
               attributes: [],
             },
@@ -34,16 +37,16 @@ class ReviewRepository {
   };
 
   findReviewByServiceId = async (customerId, serviceId) => {
-    const review = await Review.findOne({
+    const review = await this.reviewModel.findOne({
       raw: true,
       include: [
         {
-          model: Service,
+          model: this.serviceModel,
           attributes: [],
           where: { customerId },
           include: [
             {
-              model: User,
+              model: this.userModel,
               as: 'customer',
               attributes: [],
             },
@@ -59,19 +62,19 @@ class ReviewRepository {
   };
 
   findReviewByCustomerId = async (customerId) => {
-    const review = await Review.findAll({
+    const review = await this.reviewModel.findAll({
       raw: true,
       attributes: {
         include: ["Service.customerId", "Service.customer.nickname"],
       },
       include: [
         {
-          model: Service,
+          model: this.serviceModel,
           attributes: [],
           where: { customerId },
           include: [
             {
-              model: User,
+              model: this.userModel,
               as: 'customer',
               attributes: [],
             },
@@ -83,7 +86,7 @@ class ReviewRepository {
   };
 
   createReview = async (title, content, rate, serviceId) => {
-    const createReviewData = await Review.create({
+    const createReviewData = await this.reviewModel.create({
       title,
       content,
       rate,
@@ -94,7 +97,7 @@ class ReviewRepository {
   };
 
   updateReview = async (reviewId, title, content, rate) => {
-    const updateReviewData = await Review.update(
+    const updateReviewData = await this.reviewModel.update(
       { title, content, rate },
       { where: { reviewId } }
     );
@@ -103,7 +106,7 @@ class ReviewRepository {
   };
 
   deleteReview = async (reviewId) => {
-    const deleteReviewData = await Review.destroy({ where: { postId } });
+    const deleteReviewData = await this.reviewModel.destroy({ where: { postId } });
 
     return deleteReviewData;
   };

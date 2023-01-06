@@ -1,7 +1,10 @@
 const ReviewRepository = require('../repositories/reviews.repository');
+const { Review } = require('../models');
+const { Service } = require('../models');
+const { User } = require('../models');
 
 class ReviewService {
-  reviewRepository = new ReviewRepository();
+  reviewRepository = new ReviewRepository(Review, Service, User);
 
   findAllReview = async () => {
     const allReview = await this.reviewRepository.findAllReview();
