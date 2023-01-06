@@ -1,4 +1,3 @@
-
 // 페이지 로딩 완료 시
 $(document).ready(function () {
   getUser();
@@ -8,18 +7,17 @@ $(document).ready(function () {
 if (localStorage.getItem('token')) {
   document.getElementsByClassName('login-btn')[0].style.display = 'none';
   getSelf(function (response) {
+    console.log(response)
     if (response.userType === 1) {
       document.getElementById('applyServicePage').href = 'owner-services.html';
       document.getElementById('getServicePage').href = 'owner-page.html';
+    } else {
+      document.getElementsByClassName('logout-btn')[3].style.display = 'none';
     }
   });
 } else {
-  document.getElementsByClassName('logout-btn')[0].style.display = 'none';
-  document.getElementsByClassName('logout-btn')[1].style.display = 'none';
-  document.getElementsByClassName('logout-btn')[2].style.display = 'none';
-  document.getElementsByClassName('logout-btn')[3].style.display = 'none';
+  window.location.replace('/index.html');
 }
-
 
 // 로그아웃
 function logout() {
@@ -36,7 +34,7 @@ function getSelf(callback) {
       },
     })
     .then((response) => {
-      console.log(callback(response.data.user));
+      callback(response.data.user);
     })
     .catch((error) => {
       if (status == 401) {
@@ -155,4 +153,3 @@ function customAlert2(text) {
   document.getElementById('modal-text2').innerHTML = text;
   myModal2.show();
 }
-
