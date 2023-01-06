@@ -93,7 +93,7 @@ function sign_up() {
       userType: userType,
     })
     .then((response) => {
-      customAlert2('회원가입을 축하드립니다!', function () {
+      customAlert('회원가입을 축하드립니다!', function () {
         window.location.replace('/loginsignup.html');
       });
     })

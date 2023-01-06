@@ -154,7 +154,7 @@
         aria-labelledby="alertModalLabel"
         aria-hidden="true"
       >
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title">알림</h5>
@@ -171,17 +171,9 @@
             <div class="modal-footer">
               <button
                 type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                취소
-              </button>
-              <button
-                type="button"
                 class="btn btn-primary btn-confirm"
-                onclick="logout()"
               >
-                로그아웃
+                확인
               </button>
             </div>
           </div>
@@ -193,7 +185,7 @@
       id="alertModal2"
       tabindex="-1"
       data-bs-backdrop="static"
-      aria-labelledby="alertModalLabel"
+      aria-labelledby="alertModal2Label"
       aria-hidden="true"
     >
       <div class="modal-dialog modal-dialog-centered">
